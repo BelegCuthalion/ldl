@@ -1,0 +1,29 @@
+\subsection{Notations}
+In the following, a formula of language $\mathcal{L}$ is a free construction of operators $\bot$, $\top$, $\nabla$, $\vee$, $\wedge$ and $\rightarrow$, which have arities $0$, $0$, $1$, $2$, $2$ and $2$, respectively, over a countable set of atoms. We might also use the shorthand $\Box A$ for $\top \rightarrow A$.
+$\Gamma$, $\Sigma$, $\Delta$ and $\Pi$ are finite multi-sets of formulas, $A$, $B$ and $C$ are formulas, $p$ is an atom and $n$, $l$, $r$ and $k$ are natural numbers. We denote by $P$ the set of all atoms, and by $P(A)$ the set of those that occur in the formula $A$.
+
+We will write $A$ for the singleton $\{A\}$ wherever it is inferable from the context.
+Single-comma (``$,$'') is used as the multi-set union. We will also write $\Gamma^n$ for $n$ times union of a multi-set $\Gamma$ with itself. So we will write $\Gamma, A^2$ instead of $\Gamma, \{A, A\}$. Multiple applications of an operator such as $\nabla$ on a formula $A$ is denoted by $\nabla^n A$. Likewise, $\nabla^n \Gamma$ is the multi-set $\{ \nabla^n A \mid A \in \Gamma \}$.
+
+
+A sequent $\Gamma \Rightarrow \Delta$ is a binary relation between $\Gamma$, a multi-set of formulas, called \emph{the antecedent} or \emph{the left-side}, and $\Delta$, a set of at most one formula, called \emph{the succedent} or \emph{the right-side}.
+
+A rule $R$ is expressed as a relation between a set of $n$ sequents $\{ \Gamma_i \Rightarrow \Delta_i \mid 1 \leq i \leq n \}$ called \emph{premises} and a sequent $\Gamma \Rightarrow \Delta$ called \emph{conclusion}, and is written as follows:
+\begin{prooftree}
+  \AXC{$\Gamma_1 \Rightarrow \Delta_1$}
+  \AXC{$\dots$}
+  \AXC{$\Gamma_n \Rightarrow \Delta_n$}
+  \RightLabel{$R$}
+  \TIC{$\Gamma \Rightarrow \Delta$}
+\end{prooftree}
+
+A rule with $n = 0$ is called an \emph{axiom}. We will designate a specific formula in the conclusion of some rules, called \emph{the principal formula} of that rule, which will be indicated by writing it \uwave{underlined}.
+
+A proof-tree in a system is defined in the usual way.
+We will name proof-trees by $\D$, $\D'$ and so on, unless otherwise stated. We will name subtrees of $\D$ by $\D_0$, $\D_1$ and so on.
+When a proof-tree, with $\Gamma \Rightarrow \Delta$ as its root, is constructed using a system $\mathbf{G}$, we say that $\mathbf{G}$ proves $\Gamma \Rightarrow \Delta$, and write it as $\mathbf{G} \vdash \Gamma \Rightarrow \Delta$.
+
+We define the height of a proof-tree to be the length of its longest branch.
+We will write $\mathbf{G} \vdash_h \Gamma \Rightarrow \Delta$ to indicate the existence of a proof-tree of height $h$ for $\Gamma \Rightarrow \Delta$ in system $\mathbf{G}$. We will also write $h(\D)$ for the height of a proof-tree $\D$.
+
+The set of all sequents provable by a system $\mathbf{G}$ is called \emph{the logic} of that system. We will use the same notation $\mathsf{L} \vdash \Gamma \Rightarrow \Delta$ to denote the provability in a logic $\mathsf{L}$. We write the name for a logic in $\mathsf{sans~serif}$ to distinguish it from a system.
