@@ -1,0 +1,6 @@
+The systems $\LDL$ and $\LDL_*$ are defined over the language $\L$ and $\L_*$, respectively. The system $\LDL$ is defined by the table of rules below, while the system $\LDL_*$ is defined by the same rules, except $L \supset$ and $R \supset$.
+\input{dfn/ldl}
+
+Notice the differences between $\GSTN$ and $\LDL$. The latter lacks the rules $cut$ and $Lc$, its $Id$ rule is applicable only on atomic formulas, and its $Lw$ can introduce more than one formula to its conclusion. It also differs in the premises for $L \wedge$, $L \rightarrow$ and $L \vee$, which also have arbitrary number of $\nabla$s on their principal formula, which is distributed over its subformulas in their premises.
+
+In the rest of this section we are going to show that $\LDL$ and $\GSTN$ are equivalent, i.e. prove exactly the same set of sequents. Hence, proving that the logic $\ldl$ has an analytic system. To reach this aim, we have to show the admissibility of the rules $Id$, $Lc$ and $cut$ from $\GSTN$ in $\LDL$.
