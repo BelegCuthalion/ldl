@@ -1,0 +1,28 @@
+\begin{thm}[$Id$]\label{thm:id-adm}
+	$\LDL \vdash A \Rightarrow A$.
+\end{thm}
+\begin{proof}
+	By induction on the structure of $A$. If $A$ is an atom, $\bot$ or $\top$, we would have $A \Rightarrow A$ using the axioms of $\LDL$, $Lw$ and $Rw$. If $A = B \circ C$, where $\circ \in \{\wedge, \vee, \supset\}$, the claim is clear from the induction hypothesis for $B$ and $C$. We will explain the proof in details for $A = B \rightarrow C$ and $A = \nabla B$. Notice that the subtrees denoted by IH are obtained from the induction hypothesis.
+
+($B \rightarrow C$)
+\begin{prooftree}
+  \AXC{IH} \noLine
+  \UIC{$B \Rightarrow B$} \RightLabel{$Lw$}
+  \UIC{$\nabla (B \rightarrow C), B \Rightarrow B$}
+  \AXC{IH} \noLine
+  \UIC{$C \Rightarrow C$} \RightLabel{$Lw$}
+  \UIC{$\nabla (B \rightarrow C), C \Rightarrow C$}
+  \RightLabel{$L \rightarrow$}
+  \BIC{$\nabla (B \rightarrow C), B \Rightarrow C$}
+  \RightLabel{$R \rightarrow$}
+  \UIC{$B \rightarrow C \Rightarrow B \rightarrow C$}
+\end{prooftree}
+
+($\nabla B$)
+\begin{prooftree}
+  \AXC{IH} \noLine
+  \UIC{$B \Rightarrow B$}
+  \RightLabel{$N$}
+  \UIC{$\nabla B \Rightarrow \nabla B$}
+\end{prooftree}
+\end{proof}
