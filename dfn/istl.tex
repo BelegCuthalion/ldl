@@ -1,0 +1,128 @@
+\begin{multicols}{3}
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$A \Rightarrow A$}
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$L \bot$}
+    \UIC{$ \bot \Rightarrow $}		
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$R \top$}
+    \UIC{$ \Rightarrow \top$}
+  \end{prooftree}
+\end{multicols}
+
+\begin{multicols}{3}
+  \begin{prooftree}
+    \AXC{$ \Gamma, A \Rightarrow \Delta$}
+    \RightLabel{$L \wedge_1$}
+    \UIC{$ \Gamma, {A \wedge B} \Rightarrow \Delta$}		
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{$ \Gamma, B \Rightarrow \Delta$}
+    \RightLabel{$L \wedge_2$}
+    \UIC{$\Gamma, {A \wedge B} \Rightarrow \Delta$}		
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{$\Gamma \Rightarrow A$}
+    \AXC{$\Gamma \Rightarrow B$}
+    \RightLabel{$R \wedge$}
+    \BIC{$ \Gamma \Rightarrow {A \wedge B}$}
+  \end{prooftree}
+\end{multicols}
+
+\begin{prooftree}
+  \AXC{$ \Gamma, A \Rightarrow \Delta$}
+  \AXC{$\Gamma, B \Rightarrow \Delta$}
+  \RightLabel{$L \vee$}
+  \BIC{$ \Gamma, {A \vee B} \Rightarrow \Delta$}
+\end{prooftree}
+
+
+\begin{multicols}{2}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{$\Gamma \Rightarrow A$}
+    \RightLabel{$R \vee_1$}
+    \UIC{$\Gamma \Rightarrow {A \vee B}$}		
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{$\Gamma \Rightarrow B$}
+    \RightLabel{$R \vee_2$}
+    \UIC{$\Gamma \Rightarrow {A \vee B}$}		
+  \end{prooftree}
+\end{multicols}
+
+ \begin{multicols}{2}
+  \begin{prooftree}
+    \AXC{$\Gamma \Rightarrow A$}
+    \AXC{$\Gamma, B \Rightarrow \Delta$}
+    \RightLabel{$L \rightarrow$}
+    \BIC{$\Gamma, {\nabla (A \rightarrow B)} \Rightarrow \Delta$}		
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{$\nabla \Gamma, A \Rightarrow B$}
+    \RightLabel{$R \rightarrow$}
+    \UIC{$\Gamma \Rightarrow {A \rightarrow B}$}		
+  \end{prooftree}
+\end{multicols}
+
+\begin{multicols}{2}
+  \begin{prooftree}
+    \AXC{$\Gamma \Rightarrow A$}
+    \AXC{$\Gamma, B \Rightarrow \Delta$}
+    \RightLabel{$L \supset$}
+    \BIC{$\Gamma, A \supset B \Rightarrow \Delta$}		
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{$\Gamma, A \Rightarrow B$}
+    \RightLabel{$R \supset$}
+    \UIC{$\Gamma \Rightarrow A \supset B$}		
+  \end{prooftree}
+\end{multicols}
+
+\begin{multicols}{3}
+ \begin{prooftree}
+   \AXC{$ \Gamma \Rightarrow \Delta$}
+   \RightLabel{$L w$}
+   \UIC{$ \Gamma, {A} \Rightarrow \Delta$}
+ \end{prooftree}
+ \columnbreak
+ \begin{prooftree}
+   \AXC{$ \Gamma \Rightarrow$}
+   \RightLabel{$R w$}
+    \UIC{$\Gamma \Rightarrow {A}$}		
+ \end{prooftree}
+ \columnbreak
+  \begin{prooftree}
+    \AXC{$ \Gamma, A, A \Rightarrow \Delta$}
+    \RightLabel{$Lc$}
+    \UIC{$\Gamma, {A} \Rightarrow \Delta$}		
+  \end{prooftree}
+\end{multicols}
+
+\begin{prooftree}
+  \AXC{$\Gamma \Rightarrow \Delta$}
+  \RightLabel{$N$}
+  \UIC{$\nabla \Gamma \Rightarrow \nabla \Delta$}
+\end{prooftree}
+
+\begin{prooftree}
+  \AXC{$\Gamma \Rightarrow A$}
+  \AXC{$\Sigma, A \Rightarrow \Delta$}
+  \RightLabel{$cut$}
+  \BIC{$\Gamma, \Sigma \Rightarrow \Delta$}
+\end{prooftree}
+
+The system $\GSTN$ is defined over the language $\L$ consisting of all the above rules. Moreover, the system $\GSTN_*$ is defined over $\L_*$ consisting of all the above rules except $L \supset$ and $R \supset$.

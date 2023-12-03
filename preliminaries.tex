@@ -1,6 +1,5 @@
-\subsection{Notations}
-In the following, a formula of language $\mathcal{L}$ is a free construction of operators $\bot$, $\top$, $\nabla$, $\vee$, $\wedge$ and $\rightarrow$, which have arities $0$, $0$, $1$, $2$, $2$ and $2$, respectively, over a countable set of atoms. We might also use the shorthand $\Box A$ for $\top \rightarrow A$.
-$\Gamma$, $\Sigma$, $\Delta$ and $\Pi$ are finite multi-sets of formulas, $A$, $B$ and $C$ are formulas, $p$ is an atom and $n$, $l$, $r$ and $k$ are natural numbers. We denote by $P$ the set of all atoms, and by $P(A)$ the set of those that occur in the formula $A$.
+In the following, a formula of a language is a free construction of the language, over a countable set of atomic variables. We define the language $\L_* = \{\rightarrow, \vee, \wedge, \nabla, \top, \bot\}$, and the extended language $\L = \L_* \cup \{\supset\}$. Constructors $\bot$, $\top$, $\nabla$, $\vee$, $\wedge$, $\rightarrow$ and $\supset$ are called operators, and have arities $0$, $0$, $1$, $2$, $2$, $2$ and $2$, respectively. We might also use the shorthand $\Box A$ for $\top \rightarrow A$.
+$\Gamma$, $\Sigma$, $\Delta$ and $\Pi$ are finite multi-sets of formulas, $A$, $B$ and $C$ are formulas, $p$ is an atom and $n$, $l$, $r$ and $k$ are natural numbers. We denote by $V$ the set of all atoms, and by $V(A)$ and $V(\Gamma)$ the set of those that occur in the formula $A$ and in all formulas in $\Gamma$ respectively.
 
 We will write $A$ for the singleton $\{A\}$ wherever it is inferable from the context.
 Single-comma (``$,$'') is used as the multi-set union. We will also write $\Gamma^n$ for $n$ times union of a multi-set $\Gamma$ with itself. So we will write $\Gamma, A^2$ instead of $\Gamma, \{A, A\}$. Multiple applications of an operator such as $\nabla$ on a formula $A$ is denoted by $\nabla^n A$. Likewise, $\nabla^n \Gamma$ is the multi-set $\{ \nabla^n A \mid A \in \Gamma \}$.
@@ -26,4 +25,72 @@ When a proof-tree, with $\Gamma \Rightarrow \Delta$ as its root, is constructed 
 We define the height of a proof-tree to be the length of its longest branch.
 We will write $\mathbf{G} \vdash_h \Gamma \Rightarrow \Delta$ to indicate the existence of a proof-tree of height $h$ for $\Gamma \Rightarrow \Delta$ in system $\mathbf{G}$. We will also write $h(\D)$ for the height of a proof-tree $\D$.
 
-The set of all sequents provable by a system $\mathbf{G}$ is called \emph{the logic} of that system. We will use the same notation $\mathsf{L} \vdash \Gamma \Rightarrow \Delta$ to denote the provability in a logic $\mathsf{L}$. We write the name for a logic in $\mathsf{sans~serif}$ to distinguish it from a system.
+The set of all formulas $A$ where $\mathbf{G} \vdash \Rightarrow A$ is called \emph{the logic} $\mathbf{G}$. We will use the same notation $\mathsf{L} \vdash A$ to denote the provability in a logic $\mathsf{L}$. We write the name for a logic in $\mathsf{sans~serif}$ to distinguish it from a system.
+
+We will define an abstract implication as a binary operator which ``internalizes'' the preorder structure of a meet-semilatice. This will generalize a wide range of known implication operators, most notably, intuitionistic and classical implications.
+\begin{dfn}
+  Let $\mathcal{A} = (A, \le, \wedge, 1)$ be a bounded meet-semilatice, that is a strucure ordered with $\le$ and with $\wedge$ as the binary infimum (also called \emph{meet}) operator and $1$ as the maximum element. An abstract implication on $\mathcal{A}$ is a monotone operator $\rightarrow : \mathcal{A}^{op} \times \mathcal{A} \rightarrow \mathcal{A}$ which satisfies the following:
+  \begin{enumerate}
+    \item $a \rightarrow a = 1$
+    \item $(a \rightarrow b) \wedge (b \rightarrow c) \le (a \rightarrow c)$
+  \end{enumerate}
+  Then the structure $(\mathcal{A}, \le, \rightarrow, \wedge, 1)$ is called a \emph{strong algebra}.
+  \end{dfn}
+  Observe that both implications in the intuitionistic and classical settings satisfy this definition, capturing the preorder structure of entailment over proppsitions in their respective semantics, namely, Heyting and Boolean algebras. We can also find very weak instances of this definition. For example, define $a \rightarrow b = 1$, for all $a$ and $b$. These examples show that some desired properties of an implication do not necessarily hold for abstract implications, such as the adjunction $(\_) \wedge x \dashv x \rightarrow (\_)$, which means that these weak implications will not have the usual pair of introduction-elimination rules. This shows that, from an algebraic point of view, abstract implication is not generally well-behaved.
+  
+  The interesting instance of an abstract implication, which is also logically well-behaved, is that of a \emph{$\nabla$-algebra}, where the implication is a part of an adjunction.
+
+  \begin{dfn}\label{dfn:n-alg} Let $(A, \le, \vee, \wedge, 0, 1)$ be a bounded lattice, which is an ordered structure with $\vee$ and $\wedge$ as the binary supremum (also called \emph{join}) and the binary infimum operators, and $0$ and $1$ are the minimum and maximum elements. A \emph{$\nabla$-algebra} is a structure $(A, \le, \rightarrow, \vee, \wedge, \nabla, 0, 1)$ where $\rightarrow$ and $\nabla$ are binary and unary operations respectively, satisfying the adjunction below, for all $a$, $b$ and $c \in A$.
+  \[ \nabla c \wedge a \le b \iff c \le a \rightarrow b \]
+  It follows from this definition that $\nabla$ is monotone and join-preserving. A $\nabla$-algebra is called \emph{normal} if $\nabla$ also meet-preserving.
+  \end{dfn}
+
+  It is also not hard to see that the operator $\rightarrow$ in any $\nabla$-algebra is an implication. However, as shown in \cite{amir}, any abstract implication can be represented by the well-behaved implications of $\nabla$-algebras:
+
+  \begin{thm}
+  For any strong algebra $(A, \le_A, \rightarrow_A, \wedge_A, 1_A)$, there exists a $\nabla$-algebra $(B, \le_B, \rightarrow_B, \vee_B, \wedge_B, 0_B, 1_B)$, a monotone function $F : B \to B$, and a bounded meet-semilatice embedding $i : A \to B$ (i.e., an injection which preserves the bounded meet semi-lattice structure) such that $i(a \rightarrow_A b) = F(i(a)) \rightarrow_B F(i(b))$, for all $a$ and $b \in A$.
+  \end{thm}
+
+  As a result, $\nabla$-algerbras could be seen as the algebraically well-behaved counterpart for strong algebras, which motivates studying the former. Also, $\nabla$-algebras a natural source of the abstract implications.
+  \vspace*{2mm}
+  
+  Another motivation for studying $\nabla$-algebras are from a \emph{dynamic topological system}, which is a topological space augumented with a unary continuous function over it. The algebraic version of a topological space is a \emph{locale}, which is a complete lattice (that is a lattice with all suprema and infima for its arbitrary subsets, hence, necessarily bounded) whose binary meet operator distributes over arbitrary joins. A \emph{dynamic locale} is locale augumented with a localic map, which is a morphism that preserves binary meets and arbitrary joins.
+  
+  The canonical example of locales and the localic maps are the lattice of the open subsets of a topological space and the inverse image of the continuous functions between spaces, respectively. In this sense, locales and the localic maps provide a point-free formalization for the topological discourse, focusing only on open subsets as the main ingredient of topology.
+
+  \begin{dfn}
+    Let $\mathcal{X} = (X, \le, \vee, \wedge, 0, 1)$ be a complete lattice. We call $\mathcal{X}$ a \emph{locale} if for all $x \in X$ and $Y \subseteq X$, we have $x \wedge \bigvee_{y \in Y} y = \bigvee_{y \in Y} (x \wedge y)$.
+    A \emph{dynamic locale} is a structure $(X, \le, \wedge, \vee, \nabla, 0, 1)$ where $(X, \le, \vee, \wedge, 0, 1)$ is a locale and $\nabla : X \rightarrow \mathcal X$ is monotone and preserves binary meet and arbitrary joins.
+  \end{dfn}
+
+  It is also shown that on a dynamic locale, an implication is induced which satisfies the adjunction in Definition \ref{dfn:n-alg}. Hence, one can observe that a dynamic locale is essentially a $\nabla$-algebra where we replaced the underlying bounded lattice structure with a locale, and whose $\nabla$ operator is also meet-preserving. The next theorem which states this fact is proved in \cite{amir}.
+  
+  \begin{thm}
+    Let $\mathcal{X} = (X, \le, \wedge, \vee, \nabla, 0, 1)$ be a dynamic locale. There is an implication $\rightarrow$ over $X$ where $(X, \le, \rightarrow, \wedge, \vee, \nabla, 0, 1)$ is a $\nabla$-algebra.
+  \end{thm}
+
+  Notice that there is a Heyting structure in a locale, and likewise in a dynamic locale. We can define the usual \emph{heyting implication}, as $a \supset b = \bigvee \{c \mid c \wedge a \le b\}$. It is convenient to add implications from both $\nabla$-algebra structure and Heyting structure to the signature of a dynamic locale, where it is needed. So we might write a locale as a tuple $(X, \le, \rightarrow, \supset, \wedge, \vee, \nabla, 0, 1)$.
+
+  Now, we need to define what is means for a sequent to be true in a dynamic locale.
+  \begin{dfn}\quad
+    \begin{enumerate}
+      \item A \emph{valuation} in a dynamic locale $\mathcal{X} = (X, \le, \supset, \rightarrow, \wedge, \vee, \nabla, 0, 1)$ with canonical implication $\rightarrow$, is a function $v$ which takes all formulas in $\L$ ($\L_*$) to $X$, where $v(\bot) = 0$, $v(\top) = 1$, $v(\nabla A) = \nabla v(A)$ and  $v(A \circ B) = v(A) \circ v(B)$ for $\circ \in \{\vee, \wedge, \rightarrow, \supset\}$.
+      \item We say that a sequent $\Gamma \Rightarrow \Delta$ is \emph{true} for a valuation $V$ in a dynamic locale $\mathcal{X}$, written $(\mathcal{X}, v) \vDash \Gamma \Rightarrow \Delta$, if $\bigwedge_{A \in \Gamma} v(A) \le v(\Delta)$, where $v(\Delta) = 0$ if $\Delta = \emptyset$. Truth of a formula $A$ is defined as the truth of the sequent $\Rightarrow A$.
+      \item A sequent $\Gamma \Rightarrow \Delta$ is \emph{valid} if for all dynamic locales $\mathcal{X}$ and all valuations $v$, we have $(\mathcal{X}, v) \vDash \Gamma \Rightarrow \Delta$.
+    \end{enumerate}
+  \end{dfn}
+  
+  The logic of dynamic locales is defined by the following system, which we call $\GSTN$ here.
+  \input{dfn/istl}
+  \vspace*{1cm}
+
+  The logic of dynamic locales, $\ldl_*$, is the logic of the system $\GSTN_*$. We also denote the logic of the extended system $\GSTN$ by $\ldl$.
+  
+  It is shown in \cite{amir} that $\ldl_*$ is sound and complete with respect to the class of all dynamic locales.
+  \begin{thm} \quad
+    \begin{enumerate}
+      \item For any formula $A$ in the extended language $\L$, $\ldl \vdash A$ iff $A$ is valid in all dynamic locales.
+      \item For any formula $A$ in the language $\L_*$, $\ldl_* \vdash A$ iff $A$ is valid in all dynamic locales.
+    \end{enumerate}
+  \end{thm}
+  
