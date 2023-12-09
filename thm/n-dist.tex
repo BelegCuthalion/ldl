@@ -1,0 +1,127 @@
+\begin{lem}\label{lem:l-nabla-dist} For each $n \geq 0$
+	\begin{enumerate}
+		\item $\GSTN \vdash \nabla^n (A \vee B) \Rightarrow \nabla^n A \vee \nabla^n B$.
+	
+		\item $\GSTN \vdash \nabla^n (A \wedge B) \Rightarrow \nabla^n A \wedge \nabla^n B$. 
+	
+		\item $\GSTN \vdash \nabla^n (A \rightarrow B) \Rightarrow \nabla^n A \rightarrow \nabla^n B$.
+	\end{enumerate}
+\end{lem}
+\begin{proof}
+
+  For (1), first, observe that
+
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$R \top$}
+    \UIC{$\Rightarrow \top$}
+    \RightLabel{$Lw$}
+    \UIC{$\nabla (\top \rightarrow C) \Rightarrow \top$}
+  
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$C \Rightarrow C$}
+    \RightLabel{$Lw$}
+    \UIC{$\nabla (\top \rightarrow C), C \Rightarrow C$}
+  
+    \RightLabel{$L \rightarrow$}
+    \BIC{$\nabla (\top \rightarrow C) \Rightarrow C$}
+  \end{prooftree}
+  
+  
+  Now, let $\D$ be the proof-tree above with $C = \nabla A \vee \nabla B$.
+  
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$\nabla A \Rightarrow \nabla A$}
+    \RightLabel{$R\vee_1$}
+    \UIC{$\nabla A \Rightarrow \nabla A \vee \nabla B$}
+    \RightLabel{$Lw$}
+    \UIC{$\nabla A , \top \Rightarrow \nabla A \vee \nabla B$}
+    \RightLabel{$R \rightarrow$}
+    \UIC{$A \Rightarrow \top \rightarrow (\nabla A \vee \nabla B)$}
+  
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$\nabla B \Rightarrow \nabla B$}
+    \RightLabel{$R\vee_2$}
+    \UIC{$\nabla B \Rightarrow \nabla A \vee \nabla B$}
+    \RightLabel{$Lw$}
+    \UIC{$\nabla B , \top \Rightarrow \nabla A \vee \nabla B$}
+    \RightLabel{$R \rightarrow$}
+    \UIC{$B \Rightarrow \top \rightarrow (\nabla A \vee \nabla B)$}
+  
+    \RightLabel{$L\vee$}
+    \BIC{$A \vee B \Rightarrow \top \rightarrow (\nabla A \vee \nabla B)$}
+    \RightLabel{$N$}
+    \UIC{$\nabla (A \vee B) \Rightarrow \nabla (\top \rightarrow (\nabla A \vee \nabla B))$}
+  
+    \AXC{$\D$}
+  
+    \RightLabel{$cut$}
+    \BIC{$\nabla (A \vee B) \Rightarrow \nabla A \vee \nabla B$}
+  \end{prooftree}
+  
+  Call this proof-tree $\D_1$. Construct $\D_{n+1}$ inductively as follows.
+  
+  \begin{prooftree}
+    \AXC{$\D_n$}
+    \noLine
+    \UIC{$\nabla^n (A \vee B) \Rightarrow \nabla^n A \vee \nabla^n B$}
+    \RightLabel{$N$}
+    \UIC{$\nabla^{n+1} (A \vee B) \Rightarrow \nabla (\nabla^n A \vee \nabla^n B)$}
+  
+    \AXC{$\D_1$}
+    \noLine
+    \UIC{$\nabla (\nabla^n A \vee \nabla^n B) \Rightarrow \nabla^{n+1} A \vee \nabla^{n+1} B$}
+    
+    \RightLabel{$cut$} \LeftLabel{$\D_{n+1}:$}
+    \BIC{$\nabla^{n+1} (A \vee B) \Rightarrow \nabla^{n+1} A \vee \nabla^{n+1} B$}
+  \end{prooftree}
+
+
+  For (2) and (3) consider the following proof-trees:
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$A \Rightarrow A$}
+    \RightLabel{$L \wedge_1$}
+    \UIC{$A \wedge B \Rightarrow A$}
+    \RightLabel{$N^{(*)}$} \doubleLine
+    \UIC{$\nabla^n (A \wedge B) \Rightarrow \nabla^n A$}
+  
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$B \Rightarrow B$}
+    \RightLabel{$L \wedge_2$}
+    \UIC{$A \wedge B \Rightarrow B$}
+    \RightLabel{$N^{(*)}$} \doubleLine	
+    \UIC{$\nabla^n (A \wedge B) \Rightarrow \nabla^n B$}
+    
+    \RightLabel{$R \wedge$}
+    \BIC{$\nabla^n (A \wedge B) \Rightarrow \nabla^n A \wedge \nabla^n B$}
+  \end{prooftree}
+\vspace*{1cm}
+  \item \quad
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$A \Rightarrow A$}
+    \RightLabel{$Lw$}
+    \UIC{$A, \nabla (A \rightarrow B) \Rightarrow A$}
+  
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$B \Rightarrow B$}
+    \RightLabel{$Lw$}
+    \UIC{$A, \nabla (A \rightarrow B), B \Rightarrow B$}
+  
+    \RightLabel{$L \rightarrow$}
+    \BIC{$\nabla (A \rightarrow B) , A \Rightarrow B$}
+    \RightLabel{$N^{(*)}$} \doubleLine
+    \UIC{$\nabla^{n+1} (A \rightarrow B) , \nabla^n A \Rightarrow \nabla^n B$}
+    \RightLabel{$R \rightarrow$}
+    \UIC{$\nabla^n (A \rightarrow B) \Rightarrow \nabla^n A \rightarrow \nabla^n B$}
+  \end{prooftree}
+\end{proof}

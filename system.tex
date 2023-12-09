@@ -1,9 +1,12 @@
 The systems $\LDL$ and $\LDL_*$ are defined over the language $\L$ and $\L_*$, respectively. The system $\LDL$ is defined by the table of rules below, while the system $\LDL_*$ is defined by the same rules, except $L \supset$ and $R \supset$.
 \input{dfn/ldl}
 
-Notice the differences between $\GSTN$ and $\LDL$. The latter lacks the rules $cut$ and $Lc$, its $Id ^p$ rule is just $Id$, limited to the atomic formulas, and its $LW$ can introduce more than one formula to its conclusion. It also differs in $L \wedge ^n$, $L \vee ^n$, $L \rightarrow ^n$ and $L \supset ^n$, which also have arbitrary number of $\nabla$s on their principal formula, which is distributed over its subformulas in their premises.
+Notice the differences between $\GSTN$ and $\LDL$. The latter lacks the rules $cut$ and $Lc$, its $Id ^p$ rule is just $Id$, limited to the atomic formulas, and its $LW$ can introduce more than one formula to its conclusion, which is admissible in $\GSTN$ by multiple instances of $Lw$. It also differs in $L \wedge ^n$, $L \vee ^n$, $L \rightarrow ^n$ and $L \supset ^n$, which also have arbitrary number of $\nabla$s on their principal formula, which is distributed over its subformulas in their premises.
 
-In the rest of this section we are going to show that $\LDL$ and $\GSTN$ are equivalent, i.e. prove exactly the same set of sequents. Hence, proving that the logic $\ldl$ has an analytic system. To reach this aim, we have to show the admissibility of the rules $Id$, $Lc$ and $cut$ from $\GSTN$ in $\LDL$.
+In the rest of this section we are going to show that $\LDL$ and $\GSTN$ are equivalent, i.e. prove exactly the same set of sequents. Hence, proving that the logic $\ldl$ has an analytic system. To reach this aim, we have to show the admissibility of $Id$, $Lc$ and $cut$ from $\GSTN$ in $\LDL$, and the admissibility of $L \wedge ^n$, $L \vee ^n$, $L \rightarrow ^n$ and $L \supset ^n$ in $\GSTN$. We also need some lemmas which facilitate our admissibility proofs.
+
+\input{thm/n-dist}
+
 \input{thm/id-adm}
 
 In order to prove the admissibility of $Lc$, we also need the following \emph{inversion} lemmas for some of the rules of $\LDL$.
