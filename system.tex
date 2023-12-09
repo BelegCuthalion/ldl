@@ -5,6 +5,19 @@ The systems $\LDL$ and $\LDL_*$ are defined over the language $\L$ and $\L_*$, r
   Notice the differences between $\GSTN$ and $\LDL$. The latter lacks the rules $cut$ and $Lc$, its $Id ^p$ rule is just $Id$, limited to the atomic formulas, and its $LW$ can introduce more than one formula to its conclusion, which is admissible in $\GSTN$ by multiple instances of $Lw$. It also differs in $L \wedge ^n$, $L \vee ^n$, $L \rightarrow ^n$ and $L \supset ^n$, which also have arbitrary number of $\nabla$s on their principal formula, which is distributed over its subformulas in their premises.  
 \end{rem}
 
+\begin{rem}
+  The system $\LDL$ is \emph{analytic}, in the sense that for all of its rules, all formulas in the premises are subformulas of its conclusion, up to $\nabla$. More percisely, all formulas in the premises are of the form $\nabla^n A$ (for some $n \geq 0$) where $A$ is a subformula of the conclusion.
+\end{rem}
+
+A direct consequence of the analycity of $\LDL$ is that we don't need the rules $L \supset$ and $R \supset$ for proving sequents in the language $\L_*$.
+
+\begin{thm}\label{thm:ldl-cons-ext}
+  For any sequent $\Gamma \Rightarrow \Delta$ in the language $\L_*$, if $\LDL \vdash \Gamma \Rightarrow \Delta$ then $\LDL_* \vdash \Gamma \Rightarrow \Delta$.
+\end{thm}
+\begin{proof}
+  Easy, by induction on the proof-tree for in $\LDL$. Notice that the cases for $L \supset$ and $R \supset$ are refuted by the assumption.
+\end{proof}
+
 In the rest of this section we are going to show that $\LDL$ and $\GSTN$ are equivalent, i.e. prove exactly the same set of sequents. Hence, proving that the logic $\ldl$ has an analytic system. To reach this aim, we have to show the admissibility of $Id$, $Lc$ and $cut$ from $\GSTN$ in $\LDL$, and the admissibility of $L \wedge ^n$, $L \vee ^n$, $L \rightarrow ^n$ and $L \supset ^n$ in $\GSTN$. We also need some lemmas which facilitate our admissibility proofs.
 
 \input{thm/n-dist}
@@ -34,5 +47,20 @@ Now, we are ready to prove the equivalence of two systems.
 \input{thm/ldl-eq-gstn}
 
 \begin{cor}
-  The logic of dynamic locales $\ldl$ is the logic of the system $\LDL$.
+  $\ldl$ is the logic of the system $\LDL$.
+\end{cor}
+
+Courtesy of these results and the fact that $\ldl$ is a conservative extension of $\ldl_*$, we have the same result for the systems without the rules $L \supset$ and $R \supset$.
+
+\begin{thm}
+  Any sequent $\Gamma \Rightarrow \Delta$ in the language $\L_*$ is provable in $\GSTN_*$ iff it is provable in $\LDL_*$.
+\end{thm}
+\begin{proof}
+  Obviously, a proof-tree in $\GSTN_*$ or $\LDL_*$ is also a proof-tree in $\GSTN$ and $\LDL$, respectively. Use Theorem \ref{thm:ldl-eq-gstn} to translate proof-trees between $\GSTN$ and $\LDL$, then use Theorems \ref{thm:gstn-cons-ext} or \ref{thm:ldl-cons-ext} to translate proof-trees to $\LDL_*$ or $\GSTN_*$.
+\end{proof}
+
+So we can say the same about $\ldl_*$.
+
+\begin{cor}
+  $\ldl_*$ is the logic of the system $\LDL_*$.
 \end{cor}
