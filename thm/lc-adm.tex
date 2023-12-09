@@ -5,49 +5,49 @@
   
   If one occurrence of $A$ is principal, we have the following cases based on the last rule of the proof:
 	\begin{itemize}
-		\item[$(L \wedge)$] If the last rule is $L \wedge$, then $A = \nabla^n (B \wedge C)$ it is in the form:
+		\item[$(L \wedge ^n)$] If the last rule is $L \wedge ^n$, then $A = \nabla^n (B \wedge C)$ it is in the form:
 
 		\begin{prooftree}
 			\AXC{$\D_0$} \noLine
 			\UIC{$\Gamma, \nabla^n B, \nabla^n C, \nabla^n (B \wedge C) \Rightarrow \Delta$}
-			\RightLabel{$L \wedge$}
+			\RightLabel{$L \wedge ^n$}
 			\UIC{$\Gamma, \nabla^n (B \wedge C), \nabla^n (B \wedge C) \Rightarrow \Delta$}		
 		\end{prooftree}
 
-		Then, by Lemma \ref{lem:inv} we have a proof for $\Gamma, \nabla^n B, \nabla^n B, \nabla^n C, \nabla^n C \Rightarrow \Delta$ of height less than $h$. Using induction hypothesis twice, we would have a proof for $\Gamma, \nabla^n B, \nabla^n C \Rightarrow \Delta$ of height less than $h$. Finally, $L \wedge$ will result in the desired proof with height at most $h$.
+		Then, by Lemma \ref{lem:inv} we have a proof for $\Gamma, \nabla^n B, \nabla^n B, \nabla^n C, \nabla^n C \Rightarrow \Delta$ of height less than $h$. Using induction hypothesis twice, we would have a proof for $\Gamma, \nabla^n B, \nabla^n C \Rightarrow \Delta$ of height less than $h$. Finally, $L \wedge ^n$ will result in the desired proof with height at most $h$.
 	
-		\item[$(L \vee)$] If the last rule is $L \vee$, then $A = \nabla^n (B \vee C)$ and the last rule is in the form:
+		\item[$(L \vee ^n)$] If the last rule is $L \vee ^n$, then $A = \nabla^n (B \vee C)$ and the last rule is in the form:
 		\begin{prooftree}
 			\AXC{$\D_0$} \noLine
 			\UIC{$ \Gamma, \nabla^n B, \nabla^n (B \vee C) \Rightarrow \Delta$}
 			\AXC{$\D_1$} \noLine
 			\UIC{$\Gamma, \nabla^n C, \nabla^n (B \vee C) \Rightarrow \Delta$}
-			\RightLabel{$L \vee$}
+			\RightLabel{$L \vee ^n$}
 			\BIC{$ \Gamma, \nabla^n (B \vee C), \nabla^n (B \vee C) \Rightarrow \Delta$}		
 		\end{prooftree}
-		By Lemma \ref{lem:inv} for $\D_0$ and $\D_1$, we have proofs for $\Gamma, \nabla^n B, \nabla^n B \Rightarrow \Delta$ and $\Gamma, \nabla^n C, \nabla^n C \Rightarrow \Delta$ of heights less than $h$. By induction hypothesis, we have proofs for $\Gamma, \nabla^n B \Rightarrow \Delta$ and $\Gamma, \nabla^n C \Rightarrow \Delta$ of heights less than $h$. By $L \vee$ we have the desired proof with height at most $h$.
+		By Lemma \ref{lem:inv} for $\D_0$ and $\D_1$, we have proofs for $\Gamma, \nabla^n B, \nabla^n B \Rightarrow \Delta$ and $\Gamma, \nabla^n C, \nabla^n C \Rightarrow \Delta$ of heights less than $h$. By induction hypothesis, we have proofs for $\Gamma, \nabla^n B \Rightarrow \Delta$ and $\Gamma, \nabla^n C \Rightarrow \Delta$ of heights less than $h$. By $L \vee ^n$ we have the desired proof with height at most $h$.
 	
-		\item[$(L \rightarrow)$] If the last rule is $L \rightarrow$, then $A = \nabla^{n+1} (B \rightarrow C)$ and the last rule is in the form:
+		\item[$(L \rightarrow ^n)$] If the last rule is $L \rightarrow ^n$, then $A = \nabla^{n+1} (B \rightarrow C)$ and the last rule is in the form:
 		\begin{prooftree}
 			\AXC{$\D_0$} \noLine
 			\UIC{$\Gamma, \nabla^{n+1} (B \rightarrow C), \nabla^{n+1} (B \rightarrow C) \Rightarrow \nabla^n B$}
 			\AXC{$\D_1$} \noLine
 			\UIC{$\Gamma, \nabla^n C, (\nabla^{n+1} (B \rightarrow C)), \nabla^{n+1} (B \rightarrow C) \Rightarrow \Delta$}
-			\RightLabel{$L \rightarrow$}
+			\RightLabel{$L \rightarrow ^n$}
 			\BIC{$\Gamma, \nabla^{n+1} (B \rightarrow C), \nabla^{n+1} (B \rightarrow C) \Rightarrow \Delta$}
 		\end{prooftree}
-		By induction hypothesis, we have a proof for $\Gamma, \nabla^{n+1} (B \rightarrow C) \Rightarrow \nabla^n B$ and $\Gamma, \nabla^n C, \nabla^{n+1} (B \rightarrow C) \Rightarrow \Delta$ with height less than $h$. Finally, by $L \rightarrow$ we have the desired proof with height at most $h$.
+		By induction hypothesis, we have a proof for $\Gamma, \nabla^{n+1} (B \rightarrow C) \Rightarrow \nabla^n B$ and $\Gamma, \nabla^n C, \nabla^{n+1} (B \rightarrow C) \Rightarrow \Delta$ with height less than $h$. Finally, by $L \rightarrow ^n$ we have the desired proof with height at most $h$.
 
 	
-		\item[$(L \supset)$] If the last rule is $L \supset$, then $A = \nabla^n (B \supset C)$ and the last rule is in the form:
+		\item[$(L \supset ^n)$] If the last rule is $L \supset ^n$, then $A = \nabla^n (B \supset C)$ and the last rule is in the form:
 		\begin{prooftree}
 			\AXC{$\D_0$} \noLine
 			\UIC{$\Gamma, \nabla^n (B \supset C), \nabla^n (B \supset C) \Rightarrow \nabla^n B$}
 			\AXC{$\D_1$} \noLine
 			\UIC{$\Gamma, \nabla^n C, \nabla^n (B \supset C) \Rightarrow \Delta$}
-			\RightLabel{$L \supset$}
+			\RightLabel{$L \supset ^n$}
 			\BIC{$\Gamma, \nabla^n (B \supset C), \nabla^n (B \supset C) \Rightarrow \Delta$}
 		\end{prooftree}
-		By Lemma \ref{lem:inv} for $\D_1$, we have a proof for $\Gamma, \nabla^n C, \nabla^n C \Rightarrow \Delta$ of height less than $h$. By induction hypothesis, we have proofs for $\Gamma, \nabla^n (B \supset C) \Rightarrow \nabla^n B$ and $\Gamma, \nabla^n C \Rightarrow \Delta$, both with heights less than $h$. Finally, by $L \supset$ we have the desired proof, with height at most $h$.
+		By Lemma \ref{lem:inv} for $\D_1$, we have a proof for $\Gamma, \nabla^n C, \nabla^n C \Rightarrow \Delta$ of height less than $h$. By induction hypothesis, we have proofs for $\Gamma, \nabla^n (B \supset C) \Rightarrow \nabla^n B$ and $\Gamma, \nabla^n C \Rightarrow \Delta$, both with heights less than $h$. Finally, by $L \supset ^n$ we have the desired proof, with height at most $h$.
 	\end{itemize}
 \end{proof}
