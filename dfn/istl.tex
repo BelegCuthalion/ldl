@@ -1,3 +1,5 @@
+The system $\GSTN$ is defined over the language $\L$ consisting of all the above rules. Moreover, the system $\GSTN_*$ is defined over $\L_*$ consisting of all the above rules except $L \supset$ and $R \supset$.
+
 \begin{multicols}{3}
   \begin{prooftree}
     \AXC{}
@@ -17,6 +19,33 @@
     \UIC{$ \Rightarrow \top$}
   \end{prooftree}
 \end{multicols}
+
+\begin{multicols}{3}
+  \begin{prooftree}
+    \AXC{$ \Gamma \Rightarrow \Delta$}
+    \RightLabel{$L w$}
+    \UIC{$ \Gamma, {A} \Rightarrow \Delta$}
+  \end{prooftree}
+  \columnbreak
+  \begin{prooftree}
+    \AXC{$ \Gamma \Rightarrow$}
+    \RightLabel{$R w$}
+     \UIC{$\Gamma \Rightarrow {A}$}		
+  \end{prooftree}
+  \columnbreak
+   \begin{prooftree}
+     \AXC{$ \Gamma, A, A \Rightarrow \Delta$}
+     \RightLabel{$Lc$}
+     \UIC{$\Gamma, {A} \Rightarrow \Delta$}		
+   \end{prooftree}
+ \end{multicols}
+ 
+ \begin{prooftree}
+   \AXC{$\Gamma \Rightarrow A$}
+   \AXC{$\Sigma, A \Rightarrow \Delta$}
+   \RightLabel{$cut$}
+   \BIC{$\Gamma, \Sigma \Rightarrow \Delta$}
+ \end{prooftree}
 
 \begin{multicols}{3}
   \begin{prooftree}
@@ -92,37 +121,11 @@
   \end{prooftree}
 \end{multicols}
 
-\begin{multicols}{3}
- \begin{prooftree}
-   \AXC{$ \Gamma \Rightarrow \Delta$}
-   \RightLabel{$L w$}
-   \UIC{$ \Gamma, {A} \Rightarrow \Delta$}
- \end{prooftree}
- \columnbreak
- \begin{prooftree}
-   \AXC{$ \Gamma \Rightarrow$}
-   \RightLabel{$R w$}
-    \UIC{$\Gamma \Rightarrow {A}$}		
- \end{prooftree}
- \columnbreak
-  \begin{prooftree}
-    \AXC{$ \Gamma, A, A \Rightarrow \Delta$}
-    \RightLabel{$Lc$}
-    \UIC{$\Gamma, {A} \Rightarrow \Delta$}		
-  \end{prooftree}
-\end{multicols}
-
 \begin{prooftree}
   \AXC{$\Gamma \Rightarrow \Delta$}
   \RightLabel{$N$}
   \UIC{$\nabla \Gamma \Rightarrow \nabla \Delta$}
 \end{prooftree}
 
-\begin{prooftree}
-  \AXC{$\Gamma \Rightarrow A$}
-  \AXC{$\Sigma, A \Rightarrow \Delta$}
-  \RightLabel{$cut$}
-  \BIC{$\Gamma, \Sigma \Rightarrow \Delta$}
-\end{prooftree}
 
-The system $\GSTN$ is defined over the language $\L$ consisting of all the above rules. Moreover, the system $\GSTN_*$ is defined over $\L_*$ consisting of all the above rules except $L \supset$ and $R \supset$.
+We refer to the rules $Id$, $L \bot$ and $R \top$ as the \emph{axioms}, $L \wedge$, $R \wedge$, $L \vee$, $R \vee_1$, $R \vee_2$, $L \rightarrow$, $R \rightarrow$, $L \supset$ and $R \supset$ as the \emph{logical rules}, and $Lw$ and $Rw$ as the \emph{structural rules}.
