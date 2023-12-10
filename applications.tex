@@ -1,0 +1,90 @@
+In this section, we will see some results about $\ldl$ using proof-theoretic methods, for which we exploit the analyticity of the system $\LDL$.
+
+\begin{nota}
+	Throughout this section, by $\Gamma' \Rightarrow \Delta' \vdash \Gamma \Rightarrow \Delta$ we mean there is a proof-tree in $\LDL$ for $\Gamma \Rightarrow \Delta$, in which we can use the sequent $\Gamma' \Rightarrow \Delta'$ as an \emph{assumption}, i.e. a leaf wich is not an axiom. Particularly, $\vdash \Gamma \Rightarrow \Delta$ means $\LDL \vdash \Gamma \Rightarrow \Delta$ without any assumptios.
+\end{nota}
+
+First, we will show that a generalization of Visser's rule is admissible in our system. We will need the following lemmas to prove this generalization of the Visser's rule.
+
+\begin{lem}\label{lem:modus-ponens}
+  $\vdash A , \nabla (A \rightarrow B) \Rightarrow B$.
+\end{lem}
+\begin{proof} \quad
+  \begin{prooftree}
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$A, \nabla (A \rightarrow B) \Rightarrow A$}
+  
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$A, B, \nabla (A \rightarrow B) \Rightarrow B$}
+  
+    \RightLabel{$L \rightarrow ^n$}
+    \BIC{$A , \nabla (A \rightarrow B) \Rightarrow B$}
+  \end{prooftree}  
+\end{proof}
+
+\begin{lem}\label{lem:impl-elim}
+  $\Rightarrow A \rightarrow B \vdash A \Rightarrow B$.
+\end{lem}
+\begin{proof}\quad
+  \textit{Proof}:
+  \begin{prooftree}
+    \AXC{$\Rightarrow A \rightarrow B$}
+    \RightLabel{$N$}
+    \UIC{$\Rightarrow \nabla (A \rightarrow B)$}
+
+    \AXC{Lemma \ref{lem:modus-ponens}} \noLine
+    \UIC{$A, \nabla (A \rightarrow B) \Rightarrow B$}
+    
+    \RightLabel{$cut$}
+    \BIC{$A \Rightarrow B$}
+  \end{prooftree}
+\end{proof}
+
+\begin{lem}\label{lem:conj-context}
+  $\vdash \{ A_i \}_{i=1}^n \Rightarrow \bigwedge_{i=1}^n A_i$, for $n \geq 0$.
+\end{lem}
+
+\begin{proof}
+  For $n = 1$ we have $A_1 \Rightarrow A_1$ by Theorem \ref{thm:id-adm}. By induction on $n$, let IH be the proof tree for $\{ A_n \}_{i=1}^{n-1} \Rightarrow \bigwedge_{i=1}^{n-1}$, which we have from the induction hypothesis. For $n > 1$
+  \begin{prooftree}
+    \AXC{IH}
+    \noLine
+    \UIC{$\{ A_i \}_{i=1}^{n-1} \Rightarrow \bigwedge_{i=1}^{n-1} A_i$}
+    \RightLabel{$LW$}
+    \UIC{$\{ A_i \}_{i=1}^n \Rightarrow \bigwedge_{i=1}^{n-1} A_i$}
+
+    \AXC{}
+    \RightLabel{$Id$}
+    \UIC{$A_n \Rightarrow A_n$}
+    \doubleLine \RightLabel{$LW$}
+    \UIC{$\{ A_i \}_{i=1}^n \Rightarrow A_n$}
+
+    \RightLabel{$R\wedge$}
+    \BIC{$\{ A_i \}_{i=1}^n \Rightarrow \bigwedge_{i=1}^n A_i$}
+  \end{prooftree}
+\end{proof}
+
+
+\begin{nota}
+	In the following, $\dotdiv$ is a shorthand for the truncated subtraction, defined as $a \dotdiv b = max(a-b, 0)$.
+\end{nota}
+
+Now we can state and prove our generalized form of the Visser's rule.
+
+\begin{thm}[Generalized Visser's rules]\label{thm:visser}
+  Let $\{ n_i \}_{i=1}^l$ be a sequence of natural numbers of length $l$. If $\vdash \Rightarrow \bigwedge_{i=1}^l (\nabla^{n_i} (A_i \rightarrow B_i)) \rightarrow C \vee D$ then either $\vdash \Rightarrow \bigwedge_{i=1}^l (\nabla^{n_i} (A_i \rightarrow B_i)) \rightarrow \nabla^{n_j \dotdiv 1} A_j$ for some $j \in \{ 1 , \dots , l \}$, or $\vdash \Rightarrow \bigwedge_{i=1}^l (\nabla^{n_i} (A_i \rightarrow B_i)) \rightarrow C$, or $\vdash \Rightarrow \bigwedge_{i=1}^l (\nabla^{n_i} (A_i \rightarrow B_i)) \rightarrow D$.
+\end{thm}
+
+\begin{proof}
+  We have $\vdash \bigwedge_{i=1}^l (\nabla^{n_i} (A_i \rightarrow B_i)) \Rightarrow C \vee D$ by \ref{lem:impl-elim}. By $cut$ and \ref{lem:conj-context} we have $\vdash \{ \nabla^{n_i} (A_i \rightarrow B_i) \}_{i=1}^l \Rightarrow$ $C \vee D$. So the last rule in $\D$ must be either of $R \vee_1$, $R \vee_2$, $LW$, $Rw$ and $L \rightarrow ^n$. The rest is easy using induction on $\D$. We will explain the cases for $LW$ and $L \rightarrow ^n$ which need more work.
+	
+  Suppose $\D$ ends with $LW$, applied on $\{ \nabla^{n_i} (A_i \rightarrow B_i) \}_{i=1,i \notin K}^l \Rightarrow C \vee D$ for some $K \subseteq \{ 1 , \dots , l \}$. Let $\D'$ be the immediate subtree of $\D$. By induction hypothesis on $\D'$, we get either $\{ \nabla^{n_i} (A_i \rightarrow B_i) \}_{i=1,i \notin K}^l \Rightarrow C$, $\{ \nabla^{n_i} (A_i \rightarrow B_i) \}_{i=1,i \notin K}^l \Rightarrow D$ or $\{ \nabla^{n_i} (A_i \rightarrow B_i) \}_{i=1,i \notin K}^l \Rightarrow \nabla^{n_j \dotdiv 1} A_j$ for some $j \in \{ 1 , \dots , l \} - K$. In either case, after introducing $\{\nabla^{n_i} (A_i \rightarrow B_i)\}_{i \in K}$ on the left with $LW$ again, and enough applications of $L \wedge ^n$ and a $R \rightarrow$ we will have the desired sequent.
+    
+  Suppose $\D$ ends with $L \rightarrow ^n$, applied on $\{ \nabla^{n_i} (A_i \rightarrow B_i) \}_{i=1}^l \Rightarrow \nabla^{n_j - 1} A_j$ and $\{ \nabla^{n_i} (A_i \rightarrow B_i) \}_{i=1}^l , \nabla^{n_j - 1} B_j \Rightarrow C \vee D$ for some $j \in \{ 1 , \dots , l \}$. This implies $l>0$ and $n_j>0$ for at least one such $j$. Again, we can derive $\Rightarrow  \bigwedge_{i=1}^l (\nabla^{n_i} (A_i \rightarrow B_i)) \rightarrow \nabla^{n_j - 1} A_j$ using proper number of $L \wedge ^n$s and a $R\rightarrow$.  
+\end{proof}
+
+\begin{cor}[Disjuntion property]
+	For all formulas $B$ and $C$, if $\vdash B \vee C$ then either $\vdash B$ or $\vdash C$.
+\end{cor}
