@@ -1,0 +1,369 @@
+In this section, we go back to show that the $cut$ rule is admissible in $\LDL$ and prove Theorem \ref{thm:cut-adm}. For technical reasons, we prove a stronger version, which nevertheless results in what we have claimed.
+
+Firs, we need to define rank.
+
+\begin{dfn}
+  Rank of a formula $A$ is defined as
+  \[ \rho(A) = \begin{cases}
+  1 & \quad ; A \in P \cup \{ \bot, \top \} \\
+  \rho(B) & \quad ; A = \nabla B \\
+  max(\rho(B), \rho(C)) + 1 & \quad ; A = B \circ C \quad (\circ \in \{ \land, \lor, \rightarrow \})
+  \end{cases} \]
+  Notice that $\nabla$ does not increase the rank of a formula.
+\end{dfn}
+
+We will use multiple nested inductions in the proof of the theorem. The notion of rank for a formula will help us in using induction on the srtucture of the formula, up to $\nabla$.
+
+\begin{thm}
+  If $\LDL \vdash \Gamma \Rightarrow A$ and $\LDL \vdash \Sigma, \nabla^n A \Rightarrow \Delta$, then $\LDL \vdash \nabla^n \Gamma, \Sigma \Rightarrow \Delta$.
+\end{thm}
+\begin{proof}
+  The proof is by simultaneous inductions on the height of proof-trees for $\Gamma \Rightarrow A$ and $\Sigma, \nabla^n A \Rightarrow \Delta$, which we call $\D_1$ and $\D_2$ respectively, and on the rank of $A$. We can partition all the cases into three parts:
+  \begin{enumerate}
+    \item The cases where $A$ is not principal in the last rule of $\D_1$. This part includes all the cases where $\D_1$ ends with either of $Id^p$, $L \bot$, $LW$, $Rw$, $L \wedge ^n$, $L \vee ^n$, $L \rightarrow ^n$, $L \supset ^n$, or $N$.
+
+    \item The cases where $A$ is principal in the last rule of $\D_1$, but $\nabla^n A$ not principal in last rule of $\D_2$.
+
+    \item The cases where $A$ is principal in the last rules of both $\D_1$ and $\nabla^n A$ is principal in the last rules of $\D_2$.
+  \end{enumerate}
+  In the first two parts, we will use the induction hypothesis for the subtree of $\D_1$ and $\D_2$, while in the last part, we will also use the induction hypothesis for the formulas with smaller rank than $A$, which are the subformulas of $A$ up to $\nabla$.
+
+  Part (1). The case where $\D_1$ ends with $Id^p$ is trivial and the case for $L \bot$ is infeasible. If $\D_1$ ends with $Rw$, we can prove the desired sequent using $LW$ and $Rw$ on the premise $\Gamma \Rightarrow$. In the remaining cases, $\D_1$ has at least one premise with $A$ on its succedent, except the case for $N$, where $A$ is on the succedent of the premise with one less $\nabla$. In any of these cases we can apply the induction hypothesis for that premise and $\D_2$ to remove $\nabla^n A$, and then apply the same last rule.
+
+  Notice that by the induction hypothesis, for any $n'$ and $\Gamma'$, and for any proof-tree like $\D'$ for $\Gamma' \Rightarrow A$, if $h(\D') < h(\D_1)$, there exists a proof-tree for $\nabla^{n'} \Gamma', \Sigma \Rightarrow \Delta$, which we will use in our proof-trees like a rule, denoted by $\IH$ on its right-side, and call it $\IH(\D')$.
+
+  Here we will only mention the cases for $L \wedge ^n$, $L \vee ^n$, $L \rightarrow ^n$ and $N$. Other cases are handled similarly. In each case we denote the subtrees for the possible premises of $\D_1$ by $\D_1'$ and $\D_1''$. Now, suppose that $\D_1$ ends with either of the following rules:
+
+
+
+  \noindent($L \wedge ^n$): Let $\D_1$ ends with $L \wedge ^n$. So we have
+  \begin{prooftree}
+		\noLine
+		\AXC{$\D_1'$}
+		\UIC{$\Gamma, \nabla^r B, \nabla^r C \Rightarrow A$}
+		
+		\RightLabel{$L \wedge ^n$}
+		\UIC{$\Gamma, \nabla^r (B \wedge C) \Rightarrow A$}
+  \end{prooftree}
+  Then we have the desired sequent by applying $L \wedge ^n$ on $\IH(\D_1')$.
+  \begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\Gamma, \nabla^r B, \nabla^r C \Rightarrow A$}
+
+    \noLine
+    \AXC{$\D_2$}
+    \UIC{$\Sigma, \nabla^n A\Rightarrow \Delta$}
+
+    \RightLabel{IH}
+    \BIC{$\nabla^n \Gamma, \nabla^{n+r} B, \nabla^{n+r} C, \Sigma \Rightarrow \Delta$}
+
+    \RightLabel{$L \wedge ^n$}
+    \UIC{$\nabla^n \Gamma, \nabla^{n+r} (B \wedge C), \Sigma \Rightarrow \Delta$}
+  \end{prooftree}\quad\\
+
+
+  \noindent($L \vee ^n$): Let $\D_1$ ends with $L \vee ^n$, that is
+	\begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\Gamma, \nabla^r B \Rightarrow A$}
+    
+    \noLine
+    \AXC{$\D_1''$}
+    \UIC{$\Gamma, \nabla^r C \Rightarrow A$}
+    
+    \RightLabel{$L \vee ^n$}
+    \BIC{$\Gamma, \nabla^r (B \vee C) \Rightarrow A$}
+	\end{prooftree}
+	Then we have the desired sequent by applying $L \vee ^n$ again on $\IH(\D_1')$ and $\IH(\D_2')$.
+	\begin{prooftree}
+		\noLine
+		\AXC{$\D_1'$}
+		\UIC{$\Gamma, \nabla^r B \Rightarrow A$}
+		
+		\noLine
+		\AXC{$\D_2$}
+		\UIC{$\Sigma, \nabla^n A \Rightarrow \Delta$}
+		
+		\RightLabel{IH}
+		\BIC{$\nabla^n \Gamma, \nabla^{n+r} B, \Sigma \Rightarrow \Delta$}
+		
+
+		\noLine
+		\AXC{$\D_1''$}
+		\UIC{$\Gamma, \nabla^r C \Rightarrow A$}
+		
+		\noLine
+		\AXC{$\D_2$}
+		\UIC{$\Sigma, \nabla^n A \Rightarrow \Delta$}
+		
+		\RightLabel{IH}
+		\BIC{$\nabla^n \Gamma, \nabla^{n+r} C, \Sigma \Rightarrow \Delta$}
+
+		\RightLabel{$L \vee ^n$}
+		\BIC{$\nabla^n \Gamma, \nabla^{n+r} (B \vee C), \Sigma \Rightarrow \Delta$}
+	\end{prooftree}\quad\\
+
+
+  \noindent($L \rightarrow ^n$): Suppose $\D_1$ ends with $L \rightarrow ^n$, that is
+  \begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\Gamma, \nabla^{r+1} (B \rightarrow C) \Rightarrow \nabla^r B$}
+    \noLine
+    \AXC{$\D_1''$}
+    \UIC{$\Gamma, \nabla^{r+1} (B \rightarrow C), \nabla^r C \Rightarrow A$}
+    \RightLabel{$L \rightarrow ^n$}
+    \BIC{$\Gamma, \nabla^{r+1} (B \rightarrow C) \Rightarrow A$}
+  \end{prooftree}
+  We can remove $\nabla^n A$ from $\D_2$ by $\IH(\D_1'')$. We use $LW$ and $N$ multiple times on $\D_1'$, to prepare the other premise and apply $L \rightarrow ^n$ at last.
+  \begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\Gamma, \nabla^{r+1} (B \rightarrow C) \Rightarrow \nabla^r B$}
+    \RightLabel{$N^{(*)}$} \doubleLine
+    \UIC{$\nabla^n \Gamma, \nabla^{n+r+1} (B \rightarrow C) \Rightarrow \nabla^{n+r} B$}
+    \RightLabel{$LW$}
+    \UIC{$\nabla^n \Gamma, \nabla^{n+r+1} (B \rightarrow C), \Sigma \Rightarrow \nabla^{n+r} B$}
+
+    \noLine
+    \AXC{$\D_1''$}
+    \UIC{$\Gamma, \nabla^r C, \nabla^{r+1} (B \rightarrow C) \Rightarrow A$}
+    \noLine
+    \AXC{$\D_2$}
+    \UIC{$\Sigma, \nabla^n A \Rightarrow \Delta$}
+    \RightLabel{IH}
+    \BIC{$\nabla^n \Gamma, \nabla^{n+r+1} (B \rightarrow C), \nabla^{n+r} C, \Sigma \Rightarrow \Delta$}
+
+    \RightLabel{$L \rightarrow ^n$}
+    \BIC{$\nabla^n \Gamma, \nabla^{n+r+1} (B \rightarrow C), \Sigma \Rightarrow \Delta$}
+  \end{prooftree}
+
+  \noindent($N$): Let $A = \nabla B$ and suppose that $\D_1$ proves $\nabla \Gamma \Rightarrow \nabla B$ and $\D_2$ proves ${\Sigma, \nabla^n (\nabla B) \Rightarrow \Delta}$. Then $\IH(\D_1')$ gives us $\nabla^{n+1} \Gamma, \Sigma \Rightarrow \Delta$, which is the desired sequent.\\
+
+  Part (2). In this part we have the cases where $A$ is not principal in the last rule of $\D_2$. Notice that in all these cases, $\D_1$ ends with either of $R \top$, $R \wedge$, $R \vee_1$, $R \vee_2$, $R \rightarrow$ and $R \supset$. In these cases, we will use induction hypothesis on the proof-trees with smaller height than $\D_2$.
+
+  For the sake of briefness, we will only explain the cases where $\D_2$ ends with $L \wedge ^n$, $R \vee_1$, $R \rightarrow$ and $N$. We call the subtrees for the possible premises $\D_2'$ and $\D_2''$.
+
+  \noindent($L \wedge ^n$): Suppose that $\D_2$ ends with $L \wedge ^n$, but with a principal formula other than $A$.
+  \begin{prooftree}
+    \AXC{$\D_2'$} \noLine
+    \UIC{$\Sigma, \nabla^n A, \nabla^r B, \nabla^r C \Rightarrow \Delta$}
+    \RightLabel{$L \wedge ^n$}
+    \UIC{$\Sigma, \nabla^n A, \nabla^r (B \wedge C) \Rightarrow \Delta$}
+  \end{prooftree}
+  From induction hypothesis we have $\nabla^n \Gamma, \Sigma, \nabla^r B \Rightarrow \Delta$. By $L \wedge ^n$ we have ${\nabla^n \Gamma, \Sigma, \nabla^r (B \wedge C) \Rightarrow \Delta}$.\\
+
+  \noindent($R \vee_1$): Suppose that $D_2$ ends with $R \vee_1$.
+  \begin{prooftree}
+    \AXC{$\D_2'$} \noLine
+    \UIC{$\Sigma, \nabla^n A \Rightarrow B$}
+    \RightLabel{$R \vee_1$}
+    \UIC{$\Sigma, \nabla^n A \Rightarrow B \vee C$}
+  \end{prooftree}
+  Again, use the induction hypothesis to get $\nabla^n \Gamma, \Sigma \Rightarrow B$, then apply $R \vee_1$ to reach the desired sequent.\\
+
+  \noindent($R \rightarrow$): Suppose that $D_2$ ends with $R \rightarrow$.
+  \begin{prooftree}
+    \AXC{$\D_2'$} \noLine
+    \UIC{$\nabla \Sigma, \nabla^{n+1} A, B \Rightarrow C$}
+    \RightLabel{$R \rightarrow$}
+    \UIC{$\Sigma, \nabla^n A \Rightarrow B \rightarrow C$}
+  \end{prooftree}
+  From induction hypothesis, we have $\nabla^{n+1} \Gamma, \nabla \Sigma, B \Rightarrow C$. We can apply $R \rightarrow$ to get $\nabla^n \Gamma, \Sigma \Rightarrow B \rightarrow C$.\\
+
+  \noindent($N$): Suppose $\D_2$ ends with $N$.
+  \begin{prooftree}
+    \AXC{$\D_2'$} \noLine
+    \UIC{$\Sigma, \nabla^n A \Rightarrow \Delta$}
+    \RightLabel{$N$}
+    \UIC{$\nabla \Sigma, \nabla^{n+1} A \Rightarrow \nabla \Delta$}
+  \end{prooftree}
+  From the induction hypothesis we have $\nabla^n \Gamma, \Sigma \Rightarrow \Delta$. By $N$ we have $\nabla^{n+1} \Gamma, \nabla \Sigma \Rightarrow \nabla \Delta$, which is the desired sequent. Notice that $A$ can't have $\nabla$, because $\D_1$ can not prove a sequent with $\nabla$ on its succedent.\\
+ 
+  Part(3). In this part, we assume that $A$ is principal in $\D_1$ and $\nabla^n A$ is principal in $\D_2$. Obviously, the last rules in both $\D_1$ and $\D_2$ should match, so that they can have $A$ and $\nabla^n A$ as their principal formula. So the only possible cases are those where the $\D_1$ and $\D_2$ respectively end with either $R \wedge$ and $L \wedge ^n$, $R \vee_1$ and $L \vee ^n$, $R \vee_2$ and $L \vee ^n$, $R \rightarrow$ and $L \rightarrow ^n$, or $R \supset$ and $L \supset ^n$. As before, the subtrees for the premises are called $\D_1'$, $\D_1''$, $\D_2'$ and $\D_2''$.
+
+  In these cases, subformulas of $A$ (up to $\nabla$) are of a smaller rank than $A$. So, by induction hypothesis, we can assume the claim of the theorem holds for them in place of $A$. As before, use of induction hypothesis in the proof-trees is indicated by $\IH$.
+
+  Now, suppose $\D_1$ and $\D_2$ end with the following rules, where $A$ and $\nabla^n A$ are principal.
+
+  \noindent($R \wedge$ and $L \wedge ^n$): Suppose $D_1$ ends with $R \wedge$ and $D_2$ ends with $L \wedge ^n$. So $A$ must be of the form $A_1 \wedge A_2$.
+  \begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\Gamma \Rightarrow A_1$}
+    \noLine
+    \AXC{$\D_1''$}
+    \UIC{$\Gamma \Rightarrow A_2$}
+    \RightLabel{$R \wedge$}
+    \BIC{$\Gamma \Rightarrow A_1 \wedge A_2$}
+    
+    \noLine
+    \AXC{$\D_2'$}
+    \UIC{$\Sigma, \nabla^n A_1, \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{$L \wedge ^n$}
+    \UIC{$\Sigma, \nabla^n (A_1 \wedge A_2) \Rightarrow \Delta$}
+    
+    \noLine
+    \BIC{}
+  \end{prooftree}
+  Then
+  \begin{prooftree}
+    \AXC{$\D_1''$}\noLine
+    \UIC{$\Gamma \Rightarrow A_2$}
+    \AXC{$\D_1'$}\noLine
+    \UIC{$\Gamma \Rightarrow A_1$}
+    \AXC{$\D_2'$}\noLine
+    \UIC{$\Sigma, \nabla^n A_1, \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{$\IH$}
+    \BIC{$\nabla^n \Gamma, \Sigma, \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{$\IH$}
+    \BIC{$(\nabla^n \Gamma)^2, \Sigma \Rightarrow \Delta$}
+    \RightLabel{$Lc^{(*)}$}\doubleLine
+    \UIC{$\nabla^n \Gamma, \Sigma \Rightarrow \Delta$}
+  \end{prooftree}
+  Notice that both $A_1$ and $A_2$ have a lower rank than $A$. Also notice that we are using Theorem \ref{thm:lc-adm} multiple times.\\
+  
+   \noindent($R \vee_1$ or $R \vee_2$, and $L \vee ^n$):
+   
+  Suppose that $D_1$ ends with $R \vee_1$ and $D_2$ ends with $L \vee ^n$. So $A = A_1 \vee A_2$.
+  \begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\Gamma \Rightarrow A_1$}
+    \RightLabel{$R \vee_1$}
+    \UIC{$\Gamma \Rightarrow A_1 \vee A_2$}
+    \noLine
+    \AXC{$\D_2'$}
+    \UIC{$\Sigma, \nabla^n A_1 \Rightarrow \Delta$}
+    \noLine
+    \AXC{$\D_2''$}
+    \UIC{$\Sigma, \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{$L \vee ^n$}
+    \BIC{$\Sigma, \nabla^n (A_1 \vee A_2) \Rightarrow \Delta$}
+    \noLine
+    \BIC{}
+  \end{prooftree}
+  Then using induction hypothesis for $A_1$, we have
+  \begin{prooftree}
+    \AXC{$\D_1'$}\noLine
+    \UIC{$\Gamma \Rightarrow A_1$}
+    \AXC{$\D_2'$}\noLine
+    \UIC{$\Sigma, \nabla^n A_1 \Rightarrow \Delta$}
+    \RightLabel{$\IH$}
+    \BIC{$\nabla^n \Gamma, \Sigma \Rightarrow \Delta$}
+  \end{prooftree}
+
+  The case where $D_1$ ends with $R \vee_2$ is similar.\\
+  
+  \noindent($R \rightarrow$ and $L \rightarrow ^n$): Let $D_1$ and $D_2$ end with $R \rightarrow$ and $L \rightarrow ^n$ respectively. So $A = A_1 \rightarrow A_2$.
+  \begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\nabla \Gamma, A_1 \Rightarrow A_2$}
+    \RightLabel{$R \rightarrow$}
+    \UIC{$\Gamma \Rightarrow A_1 \rightarrow A_2$}
+    \noLine
+    \AXC{$\D_2'$}
+    \UIC{$\Sigma, \nabla^{n+1} (A_1 \rightarrow A_2) \Rightarrow \nabla^n A_1$}
+    \noLine
+    \AXC{$\D_2''$}
+    \UIC{$\Sigma, \nabla^{n+1} (A_1 \rightarrow A_2), \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{$L \rightarrow ^n$}
+    \BIC{$\Sigma,  \nabla^{n+1} (A_1 \rightarrow A_2) \Rightarrow \Delta$}
+    \noLine
+    \BIC{}
+  \end{prooftree}
+  Let the following proof-tree be called $\D$:
+  \begin{prooftree}
+    \AXC{$\D_1'$} \noLine
+    \UIC{$\nabla \Gamma, A_1 \Rightarrow A_2$}
+  
+    \AXC{$\D_1$} \noLine
+    \UIC{$\Gamma \Rightarrow A_1 \rightarrow A_2$}
+    \AXC{$\D_2''$} \noLine
+    \UIC{$\Sigma, \nabla^{n+1} (A_1 \rightarrow A_2), \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{IH}
+    \BIC{$\nabla^{n+1} \Gamma, \Sigma, \nabla^n A_2 \Rightarrow \Delta$}
+    \LeftLabel{$\D: ~~~$} \RightLabel{$\IH$}
+    \BIC{$(\nabla^{n+1} \Gamma)^2, \nabla^n A_1, \Sigma \Rightarrow \Delta$}
+  \end{prooftree}
+
+  Notice that the first usage of the induction hypothesis is for $\D_2''$, which has a smaller height than $\D_2$. The other usage is for $A_2$, which has a smaller rank than $A$. Now we have
+
+  \begin{prooftree}
+    \AXC{$\D_1$} \noLine
+    \UIC{$\Gamma \Rightarrow A_1 \rightarrow A_2$}
+    \AXC{$\D_2'$} \noLine
+    \UIC{$\Sigma, \nabla^{n+1} (A_1 \rightarrow A_2) \Rightarrow \nabla^n A_1$}
+    \RightLabel{IH}
+    \BIC{$\nabla^{n+1} \Gamma, \Sigma \Rightarrow \nabla^n A_1$}
+  
+    \AXC{$\D$}
+  
+    \RightLabel{$\IH$}
+    \BIC{$(\nabla^{n+1} \Gamma)^3, \Sigma^2 \Rightarrow \Delta$}
+  
+    \RightLabel{$Lc^{(*)}$} \doubleLine
+    \UIC{$\nabla^{n+1} \Gamma, \Sigma \Rightarrow \Delta$}
+  \end{prooftree}
+
+  Again, two usages of the induction hypothesis are for different inductions, applied on the height of $\D_2$ and the rank of $A$, respectively. Also, again, notice that we are using Theorem \ref{thm:lc-adm} multiple times.
+
+  
+  \noindent($R \supset$ and $L \supset ^n$): 
+  Let $A = A_1 \supset A_2$ and $D_1$ and $D_2$ end with $R \supset$ and $L \supset ^n$ respectively.
+  \begin{prooftree}
+    \noLine
+    \AXC{$\D_1'$}
+    \UIC{$\Gamma, A_1 \Rightarrow A_2$}
+    \RightLabel{$R \supset$}
+    \UIC{$\Gamma \Rightarrow A_1 \supset A_2$}
+    \noLine
+    \AXC{$\D_2'$}
+    \UIC{$\Sigma, \nabla^{n} (A_1 \supset A_2) \Rightarrow \nabla^n A_1$}
+    \noLine
+    \AXC{$\D_2''$}
+    \UIC{$\Sigma, \nabla^{n} (A_1 \supset A_2), \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{$L \supset ^n$}
+    \BIC{$\Sigma,  \nabla^{n} (A_1 \supset A_2) \Rightarrow \Delta$}
+    \noLine
+    \BIC{}
+  \end{prooftree}
+  Similar to the previous case, let $\D$ be the following proof-tree:
+  \begin{prooftree}
+    \AXC{$\D_1'$} \noLine
+    \UIC{$\Gamma, A_1 \Rightarrow A_2$}
+  
+    \AXC{$\D_1$} \noLine
+    \UIC{$\Gamma \Rightarrow A_1 \supset A_2$}
+    \AXC{$\D_2''$} \noLine
+    \UIC{$\Sigma, \nabla^{n} (A_1 \supset A_2), \nabla^n A_2 \Rightarrow \Delta$}
+    \RightLabel{IH}
+    \BIC{$\nabla^{n} \Gamma, \Sigma, \nabla^n A_2 \Rightarrow \Delta$}
+    \LeftLabel{$\D: ~~~$} \RightLabel{$\IH$}
+    \BIC{$(\nabla^{n} \Gamma)^2, \nabla^n A_1, \Sigma \Rightarrow \Delta$}
+  \end{prooftree}
+  Then
+  \begin{prooftree}
+    \AXC{$\D_1$} \noLine
+    \UIC{$\Gamma \Rightarrow A_1 \supset A_2$}
+    \AXC{$\D_2'$} \noLine
+    \UIC{$\Sigma, \nabla^{n} (A_1 \supset A_2) \Rightarrow \nabla^n A_1$}
+    \RightLabel{IH}
+    \BIC{$\nabla^{n} \Gamma, \Sigma \Rightarrow \nabla^n A_1$}
+  
+    \AXC{$\D$}
+  
+    \RightLabel{$\IH$}
+    \BIC{$(\nabla^{n} \Gamma)^3, \Sigma^2 \Rightarrow \Delta$}
+  
+    \RightLabel{$Lc^{(*)}$} \doubleLine
+    \UIC{$\nabla^{n} \Gamma, \Sigma \Rightarrow \Delta$}
+  \end{prooftree}
+  
+  \vspace{1cm}
+
+  We have contructed a proof-tree for the desired sequent, in all cases for any two possible pair of rules in $\LDL$. This concludes the proof of the theorem in all cases.
+\end{proof}
