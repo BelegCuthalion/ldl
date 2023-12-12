@@ -1,3 +1,92 @@
 Existence of \emph{interpolant} formulas was proved by W. Craig \cite{CraigA} for classical predicate logic. In this section, we prove \emph{Craig's interpolation} theorem for $\ldl$ using a method similar to Maehara \cite{maehara1960interpolation}.
 
 \input{thm/craig}
+
+
+We can not prove the same result for the fragment $\LDL_*$, because as we observed, the constructed interpolant uses $\supset$ in a case that we would face even if we were limited to the fragment. However, we can prove a weaker form of the interpolation theorem, called \emph{deductive interpolation}, in which $\vdash$ plays the role that $\Rightarrow$ has in interpolation.
+
+\begin{nota}
+  For the rest if this section, $\Gamma' \Rightarrow \Delta' \vdash \Gamma \Rightarrow \Delta$ means that there is a proof-tree in $\LDL_*$ for $\Gamma \Rightarrow \Delta$ with assumption $\Gamma' \Rightarrow \Delta'$.
+\end{nota}
+
+As we have seen, induction on the height of proof-trees is our main proof-theoretic tool here in this paper. So we must first make it clear what is the relation between $\vdash$ and $\Rightarrow$. Recall that $\Box A$ is a shorthand for $\top \rightarrow A$.
+
+\begin{dfn}
+  The set of \emph{variants} of a formula $A$, is defined inductively as follows:
+  \begin{enumerate}
+    \item $A$ is a variant of $A$, and
+    \item if $B$ is a variant of $A$, then $\nabla B$ and $\Box B$ are also variants of $A$.
+  \end{enumerate}
+  We say that a set of formulas $\Gamma$ is a variant of a set of formulas $\Sigma$, if any formula in $\Gamma$ is a variant of some formula in $\Sigma$.
+\end{dfn}
+
+To put it simply, variants of a formula $A$ are all possible combinations of $\nabla$ and $\Box$ applied on $A$.
+
+In order to facilitate working with variants, we can define variations for the rules $R \rightarrow$ and $N$, which use $\Box$ instead of $\nabla$. The following lemma shows the admissibility of these variations.
+
+\begin{lem}\label{lem:box-rules} For any $\Gamma$, $\Delta$, $A$, $B$ and $C$:
+  \begin{enumerate}
+    \item If $\LDL_* \vdash \Gamma, A \Rightarrow \Delta$ then $\LDL_* \vdash \Gamma, \nabla \Box A \Rightarrow \Delta$.
+    \item If $\LDL_* \vdash \Gamma \Rightarrow \Delta$ then $\LDL_* \vdash \Box \Gamma \Rightarrow \Box \Delta$.
+    \item If $\LDL_* \vdash \nabla \Gamma, \Sigma, A \Rightarrow B$ then $\LDL_* \vdash \Gamma, \Box \Sigma \Rightarrow A \rightarrow B$.
+  \end{enumerate}
+\end{lem}
+Before proving the Lemma, we set a convention to use these admissible rules in our proof-trees.
+\begin{nota}
+  We will use the results from parts (1), (2) and (3) of Lemma \ref{lem:box-rules} as admissible rules $L \nabla \Box$, $\Box$ and $R \rightarrow'$, respectively.
+
+  \begin{multicols}{3}
+    \begin{prooftree}
+      \AXC{$\Gamma, A \Rightarrow \Delta$}
+      \RightLabel{$L \nabla \Box$}
+      \UIC{$\Gamma, \nabla \Box A \Rightarrow \Delta$}
+    \end{prooftree}
+  \columnbreak
+    \begin{prooftree}
+      \AXC{$\Gamma \Rightarrow \Delta$}
+      \RightLabel{$\Box$}
+      \UIC{$\Box \Gamma \Rightarrow \Box \Delta$}
+    \end{prooftree}
+  \columnbreak
+    \begin{prooftree}
+      \AXC{$\nabla \Gamma, \Sigma, A \Rightarrow B$}
+      \RightLabel{$R \rightarrow'$}
+      \UIC{$\Gamma, \Box \Sigma \Rightarrow A \rightarrow B$}
+    \end{prooftree}
+  \end{multicols}
+\end{nota}
+Now we prove Lemma \ref{lem:box-rules}
+\begin{proof} \quad\\
+  \emph{(1)}
+  \begin{prooftree}
+    \AXC{$\Rightarrow \top$}
+    \RightLabel{$LW$}
+    \UIC{$\Gamma, \nabla \Box A \Rightarrow \top$}
+    \AXC{$\Gamma, A \Rightarrow \Delta$}
+    \RightLabel{$LW$}
+    \UIC{$\Gamma, \nabla \Box A, A \Rightarrow \Delta$}
+    \RightLabel{$L \rightarrow ^n$}
+    \BIC{$\Gamma, \nabla \Box A \Rightarrow \Delta$}
+  \end{prooftree}
+  \begin{multicols}{2}
+      \emph{(2)}
+      \begin{prooftree}
+        \AXC{$\Gamma \Rightarrow \Delta$}
+        \RightLabel{$L \nabla \Box^{(*)}$} \doubleLine
+        \UIC{$\nabla \Box \Gamma \Rightarrow \Delta$}
+        \RightLabel{$LW$}
+        \UIC{$\nabla \Box \Gamma, \top \Rightarrow \Delta$}
+        \RightLabel{$R \rightarrow$}
+        \UIC{$\Box \Gamma \Rightarrow \Box \Delta$}
+      \end{prooftree}
+    \columnbreak
+      \emph{(3)}
+      \begin{prooftree}
+        \AXC{$\nabla \Gamma, \Sigma, A \Rightarrow B$}
+        \RightLabel{$L \nabla \Box^{(*)}$} \doubleLine
+        \UIC{$\nabla \Gamma, \nabla \Box \Sigma, A \Rightarrow B$}
+        \RightLabel{$R \rightarrow$}
+        \UIC{$\Gamma, \Box \Sigma \Rightarrow A \rightarrow B$}
+      \end{prooftree}
+  \end{multicols}{3}
+\end{proof}
