@@ -28,7 +28,7 @@ We will use multiple nested inductions in the proof of the theorem. The notion o
   \end{enumerate}
   In the first two parts, we will use the induction hypothesis for the subtree of $\D_1$ and $\D_2$, while in the last part, we will also use the induction hypothesis for the formulas with smaller rank than $A$, which are the subformulas of $A$ up to $\nabla$.
 
-  Part (1). The case where $\D_1$ ends with $Id^p$ is trivial and the case for $L \bot$ is infeasible. If $\D_1$ ends with $Rw$, we can prove the desired sequent using $LW$ and $Rw$ on the premise $\Gamma \Rightarrow$. In the remaining cases, $\D_1$ has at least one premise with $A$ on its succedent, except the case for $N$, where $A$ is on the succedent of the premise with one less $\nabla$. In any of these cases we can apply the induction hypothesis for that premise and $\D_2$ to remove $\nabla^n A$, and then apply the same last rule.
+  Part \1. The case where $\D_1$ ends with $Id^p$ is trivial and the case for $L \bot$ is infeasible. If $\D_1$ ends with $Rw$, we can prove the desired sequent using $LW$ and $Rw$ on the premise $\Gamma \Rightarrow$. In the remaining cases, $\D_1$ has at least one premise with $A$ on its succedent, except the case for $N$, where $A$ is on the succedent of the premise with one less $\nabla$. In any of these cases we can apply the induction hypothesis for that premise and $\D_2$ to remove $\nabla^n A$, and then apply the same last rule.
 
   Notice that by the induction hypothesis, for any $n'$ and $\Gamma'$, and for any proof-tree like $\D'$ for $\Gamma' \Rightarrow A$, if $h(\D') < h(\D_1)$, there exists a proof-tree for $\nabla^{n'} \Gamma', \Sigma \Rightarrow \Delta$, which we will use in our proof-trees like a rule, denoted by $\IH$ on its right-side, and call it $\IH(\D')$.
 
@@ -142,7 +142,7 @@ We will use multiple nested inductions in the proof of the theorem. The notion o
 
   \noindent($N$): Let $A = \nabla B$ and suppose that $\D_1$ proves $\nabla \Gamma \Rightarrow \nabla B$ and $\D_2$ proves ${\Sigma, \nabla^n (\nabla B) \Rightarrow \Delta}$. Then $\IH(\D_1')$ gives us $\nabla^{n+1} \Gamma, \Sigma \Rightarrow \Delta$, which is the desired sequent.\\
 
-  Part (2). In this part we have the cases where $A$ is not principal in the last rule of $\D_2$. Notice that in all these cases, $\D_1$ ends with either of $R \top$, $R \wedge$, $R \vee_1$, $R \vee_2$, $R \rightarrow$ and $R \supset$. In these cases, we will use induction hypothesis on the proof-trees with smaller height than $\D_2$.
+  Part \2. In this part we have the cases where $A$ is not principal in the last rule of $\D_2$. Notice that in all these cases, $\D_1$ ends with either of $R \top$, $R \wedge$, $R \vee_1$, $R \vee_2$, $R \rightarrow$ and $R \supset$. In these cases, we will use induction hypothesis on the proof-trees with smaller height than $\D_2$.
 
   For the sake of briefness, we will only explain the cases where $\D_2$ ends with $L \wedge ^n$, $R \vee_1$, $R \rightarrow$ and $N$. We call the subtrees for the possible premises $\D_2'$ and $\D_2''$.
 
@@ -182,7 +182,7 @@ We will use multiple nested inductions in the proof of the theorem. The notion o
   \end{prooftree}
   From the induction hypothesis we have $\nabla^n \Gamma, \Sigma \Rightarrow \Delta$. By $N$ we have $\nabla^{n+1} \Gamma, \nabla \Sigma \Rightarrow \nabla \Delta$, which is the desired sequent. Notice that $A$ can't have $\nabla$, because $\D_1$ can not prove a sequent with $\nabla$ on its succedent.\\
  
-  Part(3). In this part, we assume that $A$ is principal in $\D_1$ and $\nabla^n A$ is principal in $\D_2$. Obviously, the last rules in both $\D_1$ and $\D_2$ should match, so that they can have $A$ and $\nabla^n A$ as their principal formula. So the only possible cases are those where the $\D_1$ and $\D_2$ respectively end with either $R \wedge$ and $L \wedge ^n$, $R \vee_1$ and $L \vee ^n$, $R \vee_2$ and $L \vee ^n$, $R \rightarrow$ and $L \rightarrow ^n$, or $R \supset$ and $L \supset ^n$. As before, the subtrees for the premises are called $\D_1'$, $\D_1''$, $\D_2'$ and $\D_2''$.
+  Part\3. In this part, we assume that $A$ is principal in $\D_1$ and $\nabla^n A$ is principal in $\D_2$. Obviously, the last rules in both $\D_1$ and $\D_2$ should match, so that they can have $A$ and $\nabla^n A$ as their principal formula. So the only possible cases are those where the $\D_1$ and $\D_2$ respectively end with either $R \wedge$ and $L \wedge ^n$, $R \vee_1$ and $L \vee ^n$, $R \vee_2$ and $L \vee ^n$, $R \rightarrow$ and $L \rightarrow ^n$, or $R \supset$ and $L \supset ^n$. As before, the subtrees for the premises are called $\D_1'$, $\D_1''$, $\D_2'$ and $\D_2''$.
 
   In these cases, subformulas of $A$ (up to $\nabla$) are of a smaller rank than $A$. So, by induction hypothesis, we can assume the claim of the theorem holds for them in place of $A$. As before, use of induction hypothesis in the proof-trees is indicated by $\IH$.
 
