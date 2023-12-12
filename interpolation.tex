@@ -3,13 +3,13 @@ Existence of \emph{interpolant} formulas was proved by W. Craig \cite{CraigA} fo
 \input{thm/craig}
 
 
-We can not prove the same result for the fragment $\LDL_*$, because as we observed, the constructed interpolant uses $\supset$ in a case that we would face even if we were limited to the fragment. However, we can prove a weaker form of the interpolation theorem, called \emph{deductive interpolation}, in which $\vdash$ plays the role that $\Rightarrow$ has in interpolation.
+We can not prove the same result for the fragment $\LDL_*$, because as we observed, the constructed interpolant uses $\supset$ in a case that we would eventually face, even if we are limited to the fragment without $\supset$. However, we can prove a weaker form of the interpolation theorem, called \emph{deductive interpolation}, in which $\vdash$ plays the role that $\Rightarrow$ has in interpolation.
 
 \begin{nota}
   For the rest if this section, $\Gamma' \Rightarrow \Delta' \vdash \Gamma \Rightarrow \Delta$ means that there is a proof-tree in $\LDL_*$ for $\Gamma \Rightarrow \Delta$ with assumption $\Gamma' \Rightarrow \Delta'$.
 \end{nota}
 
-As we have seen, induction on the height of proof-trees is our main proof-theoretic tool here in this paper. So we must first make it clear what is the relation between $\vdash$ and $\Rightarrow$. Recall that $\Box A$ is a shorthand for $\top \rightarrow A$.
+As we have seen, induction on the height of proof-trees is our main proof-theoretic tool here in this paper. So we must first make it clear what is the relation between $\vdash$ and $\Rightarrow$. Recall that $\Box A$ is a shorthand for $\top \rightarrow A$. We first define a \emph{variant} of a formula to be the formula with an arbitrary number of $\nabla$ and $\Box$.
 
 \begin{dfn}
   The set of \emph{variants} of a formula $A$, is defined inductively as follows:
