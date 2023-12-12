@@ -1,0 +1,20 @@
+\begin{lem} \label{lem:vdash}
+  For any set of formulas $A$, $\Gamma$ and $\Delta$, the following are equivalent:
+  \begin{enumerate}
+    \item $\Gamma, \Sigma_A \Rightarrow \Delta$, for a set of variants of $A$ like $\Sigma_A$.
+    \item $\Rightarrow A \vdash \Gamma \Rightarrow \Delta$.
+  \end{enumerate}
+\end{lem}
+\begin{proof}
+  From \1 to \2. Suppose we have $\Gamma, \Sigma_A \Rightarrow \Delta$ and $\Rightarrow A$, for some sets of formulas $\Gamma$ and $\Delta$, some formula $A$ and a set of its variants $\Sigma_A$. As mentioned in Remark \ref{rem:var-val}, for any member of $\Sigma_A$ such as $A'$, we can prove $\Rightarrow A'$ using appropriate number of $N$ and $\Box$. Then we can use $cut$ with $\Gamma, \Sigma_A \Rightarrow \Delta$ to prove $\Gamma \Rightarrow \Delta$.
+
+  From \2 to \1. Proceed by induction on the proof-tree $\D$ for $\Rightarrow A \vdash \Gamma \Rightarrow \Delta$ and in each case for its last rule, construct a proof-tree for $\Gamma, \Sigma_A \Rightarrow \Delta$, without the premise $\Rightarrow A$. First, suppose $\Gamma \Rightarrow \Delta$ is $\Rightarrow A$ itself. Take $A' = A$ and we have $A \Rightarrow A$ by $Id$. For the other cases for the last rule of $\D$, just take the proof-tree that the induction hypothesis on the premises, apply an appropriate instance of $LW$ if needed, and then apply the last rule of $\D$ again. We explaing some cases here, the rest are similar. Suppose $\Gamma \Rightarrow \Delta$ is proved by any of the following rules:
+
+  \begin{enumerate}
+    \item[$(L \rightarrow ^n)$] Suppose $\D$ ends with $\Gamma, \nabla^{n+1} (B \rightarrow C) \Rightarrow \Delta$, with two premises $\Gamma, \nabla^{n+1} (B \rightarrow C) \Rightarrow \nabla^n B$ and $\Gamma, \nabla^{n+1} (B \rightarrow C), \nabla^n C \Rightarrow \Delta$. From induction hypothesis, there are two sets $\Sigma_A'$ and $\Sigma_A''$ of variants of $A$, and two proof-trees (without the assumption $\Rightarrow A$) for $\Gamma, \Sigma_A', \nabla^{n+1} (B \rightarrow C) \Rightarrow \nabla^n B$ and $\Gamma, \Sigma_A'', \nabla^{n+1} (B \rightarrow C), \nabla^n C \Rightarrow \Delta$. Using $LW$, we can add $\Sigma_A''$ and $\Sigma_A'$ to the antecedent of the first and the second sequent, respectively. Using $L \rightarrow ^n$ again results in the desired sequent, with $\Sigma_A = \Sigma_A', \Sigma_A''$.
+
+    \item[$(R \rightarrow)$] Suppose $\D$ ends with $\Gamma \Rightarrow B \rightarrow C$, and has a premise $\nabla \Gamma, B \Rightarrow C$. From induction hypothesis, we have a proof-tree (without the assumption $\Rightarrow A$) for $\nabla \Gamma, \Sigma_A', B \Rightarrow C$, for a set of variants of $A$ like $\Sigma_A'$. Apply $R \rightarrow'$ to get $\Gamma, \Box \Sigma_A' \Rightarrow B \rightarrow C$, which proves the claim, with $\Sigma_A = \Box \Sigma_A'$.
+
+    \item[$(N)$] Suppose $\D$ ends with $\nabla \Gamma \Rightarrow \nabla \Delta$, and has a premise $\Gamma \Rightarrow \Delta$. From induction hypothesis, we have a proof-tree (without the assumption $\Rightarrow A$) for $\Gamma, \Sigma_A' \Rightarrow \Delta$, for a set of variants of $A$ like $\Sigma_A'$. Apply $N$ again, to get $\nabla \Gamma, \nabla \Sigma_A' \Rightarrow \nabla \Delta$, which proves the claim, with $\Sigma_A = \nabla \Sigma_A'$.
+  \end{enumerate}
+\end{proof}
