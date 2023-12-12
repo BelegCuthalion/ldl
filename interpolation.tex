@@ -9,6 +9,17 @@ We can not prove the same result for the fragment $\LDL_*$, because as we observ
   For the rest if this section, $\Gamma' \Rightarrow \Delta' \vdash \Gamma \Rightarrow \Delta$ means that there is a proof-tree in $\LDL_*$ for $\Gamma \Rightarrow \Delta$ with assumption $\Gamma' \Rightarrow \Delta'$.
 \end{nota}
 
+We state the deductive interpolation now, but we postpone its proof until after developing some more tools that will be used in the proof.
+
+\begin{thm}[Deductie Interpolation for $\ldl_*$]\label{thm:deductive}
+  For any formulas $A$ and $B$, if $\Rightarrow A \vdash\ \Rightarrow B$ then there exists a formula $C$ such that
+	\begin{enumerate}[label=(\arabic*)]
+		\item $\Rightarrow A \vdash\ \Rightarrow C$,
+		\item $\Rightarrow C \vdash\ \Rightarrow B$ and
+		\item $V(C) \subseteq V(A) \cap V(B)$.
+	\end{enumerate}
+\end{thm}
+
 As we have seen, induction on the height of proof-trees is our main proof-theoretic tool here in this paper. So we must first make it clear what is the relation between $\vdash$ and $\Rightarrow$. Recall that $\Box A$ is a shorthand for $\top \rightarrow A$. We first define a \emph{variant} of a formula to be the formula with an arbitrary number of $\nabla$ and $\Box$.
 
 \begin{dfn}
