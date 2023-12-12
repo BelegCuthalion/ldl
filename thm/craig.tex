@@ -1,0 +1,75 @@
+\begin{thm}[Craig's Interpolation for $\ldl$]\label{thm:craig} For any $\Gamma_1$, $\Gamma_2$ and $\Delta$ in the language $\L$, if $\LDL \vdash \Gamma_1 , \Gamma_2 \Rightarrow \Delta$, then there is a formula $C$ in the language $\L$ such that
+  \begin{enumerate}
+    \item $\LDL \vdash \Gamma_1 \Rightarrow C$,
+    \item $\LDL \vdash \Gamma_2 , C \Rightarrow \Delta$, and
+    \item $V(C) \subseteq V(\Gamma_1) \cap V(\Gamma_2 , \Delta)$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+Let $\D$ be a proof for $\Gamma_1 , \Gamma_2 \Rightarrow \Delta$ in $\LDL$. By induction on the height of $\D$, we construct an interpolant which satisfies (1), (2) and (3), in different cases for the last rule of $\D$. In cases for the rules $L \wedge ^n$, $L \vee ^n$, $L \supset ^n$ and $L \rightarrow ^n$, we also need to consider whether the principal formula is in $\Gamma_1$ or $\Gamma_2$ in separate cases.
+
+From the induction hypothesis, we can assume for any smaller proof-tree which proves $\Gamma_1' , \Gamma_2' \Rightarrow \Delta'$, there exists $C'$ which satisfies (1), (2) and (3) with parameters of the induction hypothesis, $\Gamma_1'$, $\Gamma_2'$ and $\Delta'$, in place of $\Gamma_1$, $\Gamma_2$ and $\Delta$ respectively. Notice that in all cases, we use induction hypothesis on the premises of $\D$, but in each case we instantiate the induction hypothesis with appropriate parameters we choose.
+
+Here we will construct $C$ in the cases for the axioms, $LW$, $L \wedge ^n$, $R \wedge$, $L \rightarrow ^n$ and $R \rightarrow$ in details. The construction in the other cases is similar and not much hard to grasp.
+
+
+\begin{enumerate}
+	\item[($Id$)]
+	\begin{enumerate}
+		\item If $\Gamma_2 = p$, then take $C = \top$. So we have $\Gamma_1 \Rightarrow \top$ by $R \top$ and $p , \top \Rightarrow p$ by $Id$. The third condition is trivial.
+		
+		\item If $\Gamma_1 = p$ then take $C = p$.
+	\end{enumerate}
+	\item[($L \top$)] Take $C = \top$.
+	
+	\item[($R \bot$)] Take $C = \bot$.
+	
+	\item[($LW$)] Suppose $\D$ proves
+	\begin{prooftree}
+    \AXC{$\Gamma_1, \Gamma_2 \Rightarrow \Delta$}
+    \RightLabel{$LW$}
+    \UIC{$\Gamma_1, \Gamma_2, \Sigma_1, \Sigma_2 \Rightarrow \Delta$}
+  \end{prooftree}
+  and we want to construct $C$ such that $\Gamma_1, \Sigma_1 \Rightarrow C$ and $\Gamma_2, \Sigma_2, C \Rightarrow \Delta$ are provable and $V(C) \subseteq V(\Gamma_1, \Sigma_1) \cap V(\Gamma_2, \Sigma_2,\Delta)$. From induction hypothesis we have a $C$ such that $\Gamma_1 \Rightarrow C$ and $\Gamma_2 , C \Rightarrow \Delta$ are provable, which turn to the desired sequents using $LW$ again. From the induction hypothesis we also have $V(C) \subseteq V(\Gamma_1) \cap V(\Gamma_2, \Delta)$. One can observe $V(C) \subseteq V(\Gamma_1, \Sigma_1) \cap V(\Gamma_2, \Sigma_2, \Delta)$, since addind $\Sigma_1$ and $\Sigma_2$ only grows the sets of atoms on the sides of the intersection.
+
+	\item[($L \wedge ^n$)] Suppose $\D$ proves
+  \begin{prooftree}
+    \AXC{$\Gamma_1, \Gamma_2, \nabla^n A, \nabla^n B \Rightarrow \Delta$}
+    \RightLabel{$L \wedge ^n$}
+    \UIC{$\Gamma_1 , \Gamma_2 , \nabla^n (A \wedge B) \Rightarrow \Delta$}
+  \end{prooftree}
+  There are two subcases, for whether (a) $\nabla^n (A \wedge B)$ should go with $\Gamma_1$ and appear in the sequent for the condition (1), or (b) $\nabla^n (A \wedge B)$  should go with $\Gamma_2$ and appear in the sequent for the condition (2).
+	\begin{enumerate}
+		\item From the induction hypothesis, take $C$ such that $\Gamma_1 \Rightarrow C$ and $\Gamma_2, \nabla^n A, \nabla^n B \Rightarrow \Delta$. So (1) is already satisfied, and (2) is also satisfied if we use a $L \wedge ^n$ on the latter sequent. It is easy to chcek that the condition (3) is also satisfied by induction hypothesis.
+
+		\item From the induction hypothesis, take $C$ such that $\Gamma_1 , \nabla^n A, \nabla^n B \Rightarrow C$ and $\Gamma_2 \Rightarrow \Delta$ are provable. Apply $L \wedge ^n$ on the former sequent.
+	\end{enumerate}
+
+	\item[($L \rightarrow ^n$)] Suppose $\D$ proves
+  \begin{prooftree}
+    \AXC{$\Gamma_1, \Gamma_2, \nabla^{n+1} (A \rightarrow B) \Rightarrow \nabla^n A$}
+    \AXC{$\Gamma_1, \Gamma_2, \nabla^{n+1} (A \rightarrow B), \nabla^n B \Rightarrow \Delta$}
+    \RightLabel{$L \rightarrow ^n$}
+    \BIC{$\Gamma_1 , \Gamma_2 , \nabla^{n+1} (A \rightarrow B) \Rightarrow \Delta$}
+  \end{prooftree}
+  Again, there are two further subcases for whether $\nabla^{n+1} (A \rightarrow B)$ should appear in the sequent for the condition (1) or (2).
+	\begin{enumerate}
+		\item We instantiate the induction hypothesis two times, with different parameters. First, take $C_1$ from the induction hypothesis such that $\Gamma_1 \Rightarrow C_1$ and $\Gamma_2, \nabla^{n+1} (A \rightarrow B), C_1 \Rightarrow \nabla^n A$ are provable. Second, take $C_2$ to be from another instance of the induction hypothesis where $\Gamma_1 \Rightarrow C_2$ and $\Gamma_2, \nabla^{n+1} (A \rightarrow B), \nabla^n B, C_2 \Rightarrow \Delta$ are provable. Construct $C$ as $C_1 \wedge C_2$.	We have $\Gamma_1 \Rightarrow C_1 \wedge C_2$ using $R \wedge$. By $LW$ and $L \wedge ^n$ we can also prove $\Gamma_2, \nabla^{n+1} (A \rightarrow B), C_1 \wedge C_2 \Rightarrow \nabla^n A$ and $\Gamma_2 , \nabla^n B, \nabla^{n+1} (A \rightarrow B), C_1 \wedge C_2 \Rightarrow \Delta$, to which we apply $L \rightarrow ^n$ to get to $\Gamma_2 , \nabla^{n+1} (A \rightarrow B) , C_1 \wedge C_2 \Rightarrow \Delta$.
+		The condition (3) is easy to check.
+
+		\item Again, we use two instances of the induction hypothesis with different parameters. From the induction hypothesis, take $C_1$ such that $\Gamma_2 \Rightarrow C_1$ and $\Gamma_1, \nabla^{n+1} (A \rightarrow B), C_1 \Rightarrow \nabla^n A$ are provable, and $C_2$ such that $\Gamma_1, \nabla^n B \Rightarrow C_2$ and $\Gamma_2, C_2 \Rightarrow \Delta$. Take $C = C_1 \supset C_2$. With a $LW$ we have $\Gamma_1, \nabla^n B, \nabla^{n+1} (A \rightarrow B), C_1 \Rightarrow C_2$. By $L \rightarrow ^n$ and $R \supset$ we get $\Gamma_1, \nabla^{n+1} (A \rightarrow B) \Rightarrow C_1 \supset C_2$.
+		We also have $\Gamma_2, C_1 \supset C_2 \Rightarrow \Delta$ using $LW$ and $L \supset$. Again, the condition (3) holds as a direct result from the induction hypothesis.
+	\end{enumerate}
+
+	\item[($R \rightarrow$)] Suppose $\D$ proves
+	\begin{prooftree}
+    \AXC{$\nabla \Gamma_1, \nabla \Gamma_2, A \Rightarrow B$}
+    \RightLabel{$R \rightarrow$}
+    \UIC{$\Gamma_1, \Gamma_2 \Rightarrow A \rightarrow B$}
+  \end{prooftree}
+  Let $C_1$ be the interpolant from the induction hypothesis such that $\nabla \Gamma_1 \Rightarrow C_1$ and $\nabla \Gamma_2, A, C_1 \Rightarrow B$ are provable. Take $C = \top \rightarrow C_1$. By $LW$ and $R \rightarrow$ we have $\Gamma_1 \Rightarrow \top \rightarrow C_1$. On the other hand, we have $\nabla \Gamma_2, A \Rightarrow \top$ by $LW$ and $R \top$. Using $L \rightarrow ^n$ we get $\nabla \Gamma_2, A, \nabla (\top \rightarrow C_1) \Rightarrow B$. By $R \rightarrow$ we have $\Gamma_2, \top \rightarrow C_1 \Rightarrow A \rightarrow B$. Checking the condition (3) is straightforward, like the previous cases.
+\end{enumerate}
+
+Other cases should be handled similarly.
+\end{proof}
